@@ -1,0 +1,139 @@
+{% extends 'masterpage.html' %} {% load static %} {% block title %}لوحة التحكم
+{% endblock title %} {% block body %}
+<section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+  <div
+    class="
+      bg-kheer
+      page-header
+      align-items-start
+      min-vh-90
+      pt-5
+      pb-11
+      m-3
+      border-radius-lg
+    "
+    style="background-image: url('../../../static/images/mahna.png')"
+  >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 text-center mx-auto pt-lg-5"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {% include 'partials/_menu.html' %}
+
+    <div class="row pt-3">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+                <h6 class="text-center"> بيانات مستند عقارى</h6>
+            <div class="row d-flex justify-content-center">
+              <div class="col-10">
+                <a
+                  href="{% url 'add-document' %}"
+                  class="btn btn-sm text-white bg-mahna"
+                >
+                  إضافة
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive">
+              <table class="table align-items-center table-bordered">
+                <thead class="bg-mahna" style="height: 2vh">
+                  <tr>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      جهة صاحب الطلب
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      اسم المالك
+                    </th>
+                    <th class="text-xxs text-white font-weight-bolder">
+                      هوية المالك
+                    </th>
+                     <th class="text-xxs text-white font-weight-bolder">
+                      نوع العقار 
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      رقم الصك
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      تاريخ الصك
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      مساحة الأرض
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      مسطحات البناء
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      العميل
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      الغرض من التقييم
+                    </th>
+                    <th class="text-secondary opacity-7 text-white"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in data %}
+                  <tr>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">
+                        {{ item.ownerPlace }}
+                      </p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.ownerName }}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">
+                        {{ item.ownerNationalID }}
+                      </p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.get_realStateType_display }}</p>
+                    </td>
+                     <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.paperNumber }}</p>
+                    </td>
+                      <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.paperDate }}</p>
+                    </td>
+                     <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.area }}</p>
+                    </td>
+                     <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.buildingArea }}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.client.name }}</p>
+                    </td>
+                      <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.ratingPurpose }}</p>
+                    </td>
+                    <td class="ms-auto text-start text-align-center">
+                      <a
+                        class="btn btn-link text-dark px-3 mb-0"
+                        href="{% url 'update-document' item.pk %}"
+                        ><i
+                          class="fas fa-pencil-alt text-primary me-2"
+                          aria-hidden="true"
+                        ></i
+                        >تعديل</a
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock body %}

@@ -1,0 +1,85 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}لوحة التحكم {% endblock title %}
+
+{% block body %}
+<section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+    <div class=" bg-kheer page-header align-items-start min-vh-90 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('../../../static/images/mahna.png')">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+     {% include 'partials/_menu.html' %}
+
+        <div class="row pt-3">
+             <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6>صاحب الطلب</h6>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-10 ">
+                       <a href="{% url 'add-client' %}" class="btn btn-sm text-white bg-mahna">
+                           إضافة
+                       </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                 <div class="table-responsive">
+
+                        <table class="table align-items-center table-bordered">
+                            <thead class="bg-mahna" style="height: 2vh;">
+                                <tr>
+                                    <th class="text-xxs font-weight-bolder text-white">الأسم</th>
+                                    <th class="text-xxs font-weight-bolder text-white"> جوال</th>
+                                    <th class="text-xxs text-white font-weight-bolder">الصلاحيات </th>
+                                    <th class="text-xxs font-weight-bolder text-white">الحقوق</th>
+                                    <th class="text-xxs font-weight-bolder text-white"> المستفيدين</th>
+                                    <th class="text-secondary opacity-7 text-white"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {% for item in data %}
+                              <tr>
+                                        <td>
+                                                    <p class="mb-0 text-xxs txt-black">{{ item.name }}</p>
+
+                                        </td>
+ <td>
+                                                    <p class="mb-0 text-xxs txt-black">{{ item.phone }}</p>
+
+                                        </td>
+                                   <td>
+                                                    <p class="mb-0 text-xxs txt-black">{{ item.authorizations }}</p>
+
+                                        </td>
+                                   <td>
+                                                    <p class="mb-0 text-xxs txt-black">{{ item.rights }}</p>
+
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 text-xxs txt-black">{{ item.benfits }}</p>
+
+                                </td>
+                               
+
+                                  <td class="ms-auto text-start">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-client' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
+                                        </td>
+                                    </tr>
+                               {% endfor %}
+
+                            </tbody>
+                        </table>
+</div>
+            </div>
+        </div>
+        </div>
+   </div>
+    </div>
+  </section>
+{% endblock body %}

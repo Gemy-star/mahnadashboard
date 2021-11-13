@@ -1,0 +1,137 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}لوحة التحكم {% endblock title %}
+
+{% block body %}
+    <section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+        <div class=" bg-kheer page-header align-items-start min-vh-90 pt-5 pb-11 m-3 border-radius-lg"
+             style="background-image: url('../../../static/images/mahna.png')">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 text-center mx-auto pt-lg-5">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            {% include 'partials/_menu.html' %}
+
+            <div class="row pt-3">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>صك الملكية</h6>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-10 ">
+                                    <a href="{% url 'add-location' %}" class="btn btn-sm text-white bg-mahna">
+                                        إضافة معاينة
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive">
+
+                                <table class="table align-items-center table-bordered">
+                                    <thead class="bg-mahna" style="height: 2vh;">
+                                    <tr>
+                                        <th class="text-xxs font-weight-bolder text-white">رابط الموقع</th>
+                                        <th class="text-xxs font-weight-bolder text-white">وصف العقار</th>
+                                        <th class="text-xxs text-white font-weight-bolder">حالة المبنى</th>
+                                        <th class="text-xxs font-weight-bolder text-white">مستوى المنطقة</th>
+                                        <th class="text-xxs font-weight-bolder text-white"> تشطيبات</th>
+                                        <th class="text-xxs font-weight-bolder text-white">عمر العقار</th>
+                                        <th class="text-xxs font-weight-bolder text-white">المستند</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in data %}
+                                        <tr>
+                                            <td>
+                                                    <span class="badge badge-sm bg-maal">
+                                                      <a href="{{ item.locationUrl }}">
+                                                          الرابط
+                                                      </a>
+                                                    </span>
+
+                                            </td>
+                                            <td>
+                                                <p class="mb-0 text-xxs txt-black">{{ item.locationDescription }}</p>
+
+                                            </td>
+                                            <td>
+                                                <p class="mb-0 text-xxs txt-black">{{ item.get_locationState_display }}</p>
+
+                                            </td>
+                                            <td>
+                                                <p class="mb-0 text-xxs txt-black">{{ item.get_locationLevel_display }}</p>
+
+                                            </td>
+                                            <td>
+                                                <p class="mb-0 text-xxs txt-black">{{ item.get_FinishType_display }}</p>
+
+                                            </td>
+                                            <td>
+                                                <p class="mb-0 text-xxs txt-black">{{ item.locationAge }}</p>
+
+                                            </td>
+                                                <td>
+<button type="button" class="btn btn-primary bg-mahna" data-toggle="modal" data-target="#exampleModal">
+المستند
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">المستند</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+        <div class="card-body pt-4 p-3">
+              <ul class="list-group">
+                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                  <div class="d-flex flex-column">
+                  <span class="mb-2 text-xs">رقم الصك</span>
+                    <h6 class="mb-3 text-sm">{{item.document.documentNumber}}</h6>
+                    <span class="mb-2 text-xs">جهة صاحب الطلب <span class="text-dark font-weight-bold ms-sm-2">{{item.document.ownerPlace}}</span></span>
+                    <span class="mb-2 text-xs">اسم المالك <span class="text-dark ms-sm-2 font-weight-bold">{{item.document.ownerName}}</span></span>
+                    <span class="text-xs">هوية المالك<span class="text-dark ms-sm-2 font-weight-bold">{{item.document.ownerNationalID}}</span></span>
+                    <span class="text-xs">نوع العقار <span class="text-dark ms-sm-2 font-weight-bold">{{item.document.get_realStateType_display}}</span></span>
+                    <span class="text-xs">رقم الصك<span class="text-dark ms-sm-2 font-weight-bold">{{item.document.paperNumber}}</span></span>
+                    <span class="text-xs">تاريخ الصك<span class="text-dark ms-sm-2 font-weight-bold">{{item.document.paperDate}}</span></span>
+                    <span class="text-xs">مساحة الأرض  <span class="text-dark ms-sm-2 font-weight-bold">{{item.document.area}}</span></span>
+                    <span class="text-xs">مسطحات البناء <span class="text-dark ms-sm-2 font-weight-bold">{{item.document.buildingArea}}</span></span>
+                    <span class="text-xs">الغرض من التقييم  <span class="text-dark ms-sm-2 font-weight-bold">{{item.document.ratingPurpose}}</span></span>
+            </div>
+                </li>    
+              </ul>
+            </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+]      </div>
+    </div>
+  </div>
+</div>
+
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

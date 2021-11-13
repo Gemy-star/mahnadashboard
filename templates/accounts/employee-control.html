@@ -1,0 +1,160 @@
+{% extends 'masterpage.html' %} {% load static %} {% block title %}الصفحة
+الرئيسية {% endblock title %} {% block body %}
+<section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+  <div
+    class="
+      bg-kheer
+      page-header
+      align-items-start
+      min-vh-90
+      pt-5
+      pb-11
+      m-3
+      border-radius-lg
+    "
+    style="background-image: url('../../static/images/mahna.png')"
+  >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 text-center mx-auto pt-lg-5"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {% include 'partials/_menu.html' %}
+
+    <div class="row pt-4">
+      <div class="col-12">
+        <div class="card z-index-0 mx-auto h-auto">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6 justify-content-center">الموظفيين</div>
+            </div>
+            <div class="row d-flex justify-content-center">
+              <div class="col-4">
+                <a
+                  href="{% url 'register-resident' %}"
+                  class="btn btn-sm text-white bg-mahna"
+                >
+                  إضافة مقيم
+                </a>
+              </div>
+              <div class="col-4">
+                <a
+                  href="{% url 'register-accountant' %}"
+                  class="btn btn-sm text-white bg-mahna"
+                >
+                  إضافة محاسب
+                </a>
+              </div>
+              <div class="col-4">
+                <a
+                  href="{% url 'register-manager' %}"
+                  class="btn btn-sm text-white bg-mahna"
+                >
+                  إضافة مدير
+                </a>
+              </div>
+           
+           
+       
+          </div>
+             <div class="row d-flex justify-content-center">
+              <div class="col-5">
+                <a
+                  href="{% url 'register-entry' %}"
+                  class="btn btn-sm text-white bg-mahna"
+                >
+                  إضافة مدخل بيانات
+                </a>
+              </div>
+              <div class="col-5">
+                <a
+                  href="{% url 'register-preview' %}"
+                  class="btn btn-sm text-white bg-mahna"
+                >
+                  إضافة معاين
+                </a>
+              </div>
+            
+           
+           
+       
+          </div>
+        </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table align-items-center table-bordered">
+                <thead class="bg-mahna" style="height: 2vh">
+                  <tr>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      الأسم
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      الهاتف
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      البريد الألكترونى
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      العنوان
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      المهام
+                    </th>
+                    <th class="text-secondary text-white"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in employees %}
+                  <tr>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black">
+                        {{ item.first_name }} {{ item.last_name }}
+                      </p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black">{{ item.phone }}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black">{{ item.email }}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black">{{ item.address }}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black">
+                        {{ item.get_user_type_display }}
+                      </p>
+                    </td>
+
+                    <td class="ms-auto text-start">
+                      {% if request.user.user_type == 1 %}
+                      <a class="btn btn-link text-danger px-3 mb-0" href="#"
+                        ><i
+                          class="far fa-trash-alt text-danger me-2"
+                          aria-hidden="true"
+                        ></i
+                        >مسح</a
+                      >
+                      {% endif %}
+                      <a class="btn btn-link text-dark px-3 mb-0" href=""
+                        ><i
+                          class="fas fa-pencil-alt text-dark me-2"
+                          aria-hidden="true"
+                        ></i
+                        >تعديل</a
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock body %}
