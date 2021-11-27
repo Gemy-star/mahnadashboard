@@ -23,9 +23,10 @@ class ClientForm(forms.ModelForm):
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = models.Documents
-        fields = ['ownerPlace', 'ownerName', 'ownerNationalID', 'realStateType', 'paperNumber',
+        fields = ['documentNumber','ownerPlace', 'ownerName', 'ownerNationalID', 'realStateType', 'paperNumber',
                   'paperDate', 'area', 'buildingArea', 'ratingPurpose', 'client']
         labels = {
+            'documentNumber':'رقم الطلب',
             'ownerPlace' : 'جهة صاحب الطلب' , 
             'ownerName' : ' إسم المالك' , 
             'ownerNationalID' : ' هوية المالك' , 
@@ -38,6 +39,8 @@ class DocumentForm(forms.ModelForm):
             'client' : ' العميل' , 
         }
         widgets = {
+            'documentNumber':forms.TextInput(
+                attrs={'id': 'ownerPlacefield','readonly':True, 'class': 'form-control', 'placeholder': 'جهة صاحب الطلب '}),
             'ownerPlace': forms.TextInput(
                 attrs={'id': 'ownerPlacefield', 'class': 'form-control', 'placeholder': 'جهة صاحب الطلب '}),
             'ownerName': forms.TextInput(
@@ -93,7 +96,7 @@ class PreviewForm(forms.ModelForm):
             'FinishType': 'نوع التشطيب ',
             'structureType': 'نوع الهيكل الأنشائى ',
             'locationAge': 'عمر العقار ',
-            'document': 'إختر المستند ',
+            'document': 'إختر رقم الطلب ',
 
         }
 

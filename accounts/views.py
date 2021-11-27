@@ -69,7 +69,7 @@ class RegisterManager(View):
                                            address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)
-            return redirect('admin-page')
+            return redirect('home-page')
 
     def get(self, request):
         context = {}
@@ -95,7 +95,7 @@ class RegisterAccountant(View):
                                               address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)
-            return redirect('admin-page')
+            return redirect('home-page')
 
     def get(self, request):
         context = {}
@@ -114,7 +114,7 @@ class RegisterResident(View):
                                             address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)
-            return redirect('admin-page')
+            return redirect('home-page')
 
     def get(self, request):
         context = {}
@@ -135,7 +135,7 @@ class RegisterEntry(View):
                                            address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)
-            return redirect('admin-page')
+            return redirect('home-page')
 
     def get(self, request):
         context = {}
@@ -157,7 +157,7 @@ class RegisterPreview(View):
                                            address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)
-            return redirect('admin-page')
+            return redirect('home-page')
 
     def get(self, request):
         context = {}

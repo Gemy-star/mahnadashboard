@@ -1,0 +1,250 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}لوحة التحكم {% endblock title %}
+{% block body %}
+<section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+    <div class=" bg-kheer page-header align-items-start min-vh-90 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('../../../static/images/mahna.png')">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-8">
+               {% include 'partials/_menu.html' %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+     {% include 'partials/_compareMenu.html' %}
+
+        <div class="row pt-3 justify-content-center">
+             <div class="col-10">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6 class="text-center">  </h6>
+                <p class="text-center"></p>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-12 col-12 d-flex justify-content-center">
+                         <div class="table-responsive">
+        <table class="table align-items-center table-bordered">
+          <thead class="bg-mahna" style="height: 2vh">
+            <tr>
+              <th scope="row" class=" font-weight-bolder text-white text-center">عناصر المقارنة</th>
+              <th scope="col" class=" text-white font-weight-bolder text-center"> العقار المراد تقييمة</th>
+              <th scope="col" class=" font-weight-bolder text-white text-center">البديل الأول </th>
+              <th scope="col" class=" font-weight-bolder text-white text-center">
+                البديل الثانى
+              </th>
+                <th scope="col" class=" font-weight-bolder text-white text-center">
+               البديل الثالث
+              </th>
+            </tr>
+          </thead>
+          <tr>
+          <th scope="row" class="bg-mahna text-white text-center"> تاريخ التقييم</th>
+            <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ building.residentDate }}
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.compareDate }}
+                </p>
+              </td>
+              {% endfor %}
+          </tr>
+           <tr>
+          <th scope="row"  class="bg-mahna text-white text-center"> رقم القطعة</th>
+             <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ building.areaNumber }}
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.CompareareaNumber }}
+                </p>
+              </td>
+              {% endfor %}
+          </tr>
+           <tr>
+          <th scope="row"  class="bg-mahna text-white text-center"> قيمة العقار</th>
+                  <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                 
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.buildingValue }}
+                </p>
+              </td>
+              {% endfor %}
+          </tr>
+           <tr>
+          <th scope="row"  class="bg-mahna text-white text-center"> سعر المتر</th>
+                  <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                 
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.priceMeter}}
+                </p>
+              </td>
+              {% endfor %}
+          </tr>
+            <tr>
+          <th scope="row"  class="bg-mahna text-white text-center"> مساحة الأرض</th>
+                 <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ building.residentDocument.document.area }}
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col" >
+            
+         <div class="d-flex" style="justify-content:space-between;">
+               <div class="text-center">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.Comparearea}}
+                </p>
+               </div>
+           <div class="text-center" style="border:1px solid;">
+               <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.areaPrecentage}} %
+                  </p>
+           </div>
+         </div>
+              </td>
+
+              {% endfor %}
+          </tr>
+            <tr>
+          <th scope="row"  class="bg-mahna text-white text-center"> مستوى المنطقة</th>
+                           <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col" >
+            
+         <div class="d-flex" style="justify-content:space-between;">
+               <div class="text-center">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.get_CompareareaLevel_display}}
+                </p>
+               </div>
+           <div class="text-center" style="border:1px solid;">
+               <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.zonePrecentage}} %
+                  </p>
+           </div>
+         </div>
+              </td>
+
+              {% endfor %}
+          </tr>
+            <tr>
+          <th scope="row"  class="bg-mahna text-white text-center"> مواقع العقار</th>
+                                     <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+              {{ building.address}}
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col" >
+            
+         <div class="d-flex" style="justify-content:space-between;">
+               <div class="text-center">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.Compareaddress}}
+                </p>
+               </div>
+           <div class="text-center" style="border:1px solid;">
+               <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.locationPrecentage}} %
+                  </p>
+           </div>
+         </div>
+              </td>
+
+              {% endfor %}
+          </tr>
+            <tr>
+          <th scope="row"  class="bg-mahna text-white text-center"> الشوارع المحيطة</th>
+                            <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+              {{ building.streetCount}}
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col" >
+            
+         <div class="d-flex" style="justify-content:space-between;">
+               <div class="text-center">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.ComparestreetCount}}
+                </p>
+               </div>
+           <div class="text-center" style="border:1px solid;">
+               <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.streetPrecentage}} %
+                  </p>
+           </div>
+         </div>
+              </td>
+
+              {% endfor %}
+
+          </tr>
+            <tr>
+          <th scope="row"  class="bg-mahna text-white text-center"> استخدام الأرض</th>
+                               <td scope="col">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+              {{ building.get_areaUsage_display}}
+                </p>
+              </td>
+              {% for item in compareBuilding %}
+                 <td scope="col" >
+            
+         <div class="d-flex" style="justify-content:space-between;">
+               <div class="text-center">
+                <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.get_CompareareaUsage_display}}
+                </p>
+               </div>
+           <div class="text-center" style="border:1px solid;">
+               <p class="mb-0 text-xxs txt-black text-align-center text-center">
+                  {{ item.usagePrecentage}} %
+                  </p>
+           </div>
+         </div>
+              </td>
+
+              {% endfor %}
+          </tr>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+   </div>
+    </div>
+  </section>
+{% endblock body %}
+
+{% block scripts%}
+
+{% endblock scripts %}

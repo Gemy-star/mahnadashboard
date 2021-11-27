@@ -5,9 +5,9 @@ from django.contrib.auth.models import Group
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
-from office.models import Documents
+from office.models import Documents , Preview
 from accounts.models import User
-
+from comparison.models import ResidentDocument
 
 class EmailThread(threading.Thread):
     def __init__(self, email):
@@ -22,6 +22,8 @@ class HomePage(View):
     login_required = True
     def get(self, request):
         context= {
-            "documents":Documents.objects.all()
+            "documents":Documents.objects.all(),
+            "previewcount": Preview.objects.all().count(),
+            "residentDocument":ResidentDocument.objects.all()
         }
         return render(request, 'home-page.html' , context=context)

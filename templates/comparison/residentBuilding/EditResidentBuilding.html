@@ -1,0 +1,57 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}لوحة التحكم {% endblock title %}
+{% block body %}
+<section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+    <div class=" bg-kheer page-header align-items-start min-vh-90 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('../../../static/images/mahna.png')">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+     {% include 'partials/_menu.html' %}
+
+        <div class="row pt-3 justify-content-center">
+             <div class="col-10">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6 class="text-center">  بيانات العقار المراد تقييمة</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 col-10 justify-content-center">
+                        <form  method="post">
+                        {% include 'partials/_messages.html' %}
+    {% csrf_token %}
+                             {% for filed in form %}
+                                            <div class="form-group">
+                                            <label class="text-black"> {{filed.label}} </label>
+                                                {{ filed }}
+                                            </div>
+                                        {% endfor %}
+                          <div class="text-center">
+
+          <button type="submit" class="btn btn-sm text-white bg-mahna">
+                           تعديل
+                       </button>
+</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+   </div>
+    </div>
+  </section>
+{% endblock body %}
+
+{% block scripts%}
+<script>
+ document.getElementById("id_areaUsage").className = "form-control";
+ document.getElementById("id_residentDocument").className = "form-control";
+</script>
+{% endblock scripts %}

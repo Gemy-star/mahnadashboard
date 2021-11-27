@@ -29,12 +29,12 @@ class Documents(models.Model):
         if no == None:
             return  1000
         else:
-            return (no*1000)+1
+            return (no*1000)+1     
     documentNumber = models.CharField(max_length=255 , unique=True , default=DocumentNumber)
     ownerPlace = models.CharField(max_length=255 , null=True , blank=True)
     ownerName = models.CharField(max_length=255 , null=True , blank=True)
     ownerNationalID = models.CharField(max_length=255 , null=True , unique=True)
-    realStateType = models.SmallIntegerField(choices=REALSTATE_CHOICES)
+    realStateType = models.SmallIntegerField(choices=REALSTATE_CHOICES , null=True)
     paperNumber = models.IntegerField(null=True , blank=True)
     paperDate = models.DateField(null=True , blank=True)
     area = models.IntegerField(null=True , blank=True)

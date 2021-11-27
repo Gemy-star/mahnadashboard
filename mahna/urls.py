@@ -26,5 +26,5 @@ urlpatterns = [
     path('', login_required(views.HomePage.as_view()), name='home-page'),
     path('users/', include('accounts.urls')),
     path('office/', include('office.urls')),
-
+    path('comparison/', include('comparison.urls')),
 ]
