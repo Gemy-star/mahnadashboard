@@ -109,3 +109,61 @@ class CompareBuildingForm(forms.ModelForm):
         'Compareaddress': 'مواقع العقار  ',
 
         }
+
+
+class UnDirectBuildingCostForm(forms.ModelForm):
+     class Meta:    
+        model = models.UndirectBuildingCost
+        fields = ['document', 'technicalFees', 'developerFees' , 'serviceFees']
+        widgets = {
+            'document':forms.Select(choices=Documents.objects.all().values_list()),
+            'technicalFees': forms.NumberInput(
+                attrs={'id': 'technicalFeesfield', 'class': 'form-control', 'placeholder': ' رسوم مهنيه   '}),
+            'serviceFees': forms.NumberInput(
+                attrs={'id': 'serviceFeesfield', 'class': 'form-control', 'placeholder': '   رسوم المرافق  '}),
+            'developerFees': forms.NumberInput(
+                attrs={'id': 'developerFeesfield', 'class': 'form-control', 'placeholder': '    ربح المطور  '}),
+        }
+        labels = {
+            'document': 'إختر مستند التقييم',
+            'technicalFees': '  رسوم مهنية  ',
+            'serviceFees': 'رسوم المرافق',
+            'developerFees': '  ربح المطور',
+
+        }
+
+
+class DirectBuildingCostForm(forms.ModelForm):
+    class Meta:
+        model = models.DirectBuildingCost
+        fields = ['document', 'areaBuildCost', 'priceMeterCost']
+        widgets = {
+            'document':forms.Select(choices=Documents.objects.all().values_list()),
+            'areaBuildCost': forms.NumberInput(
+                attrs={'id': 'areaBuildCostfield', 'class': 'form-control', 'placeholder': 'تكاليف مساحات البناء '}),
+            'priceMeterCost': forms.NumberInput(
+                attrs={'id': 'authorizationsfield', 'class': 'form-control', 'placeholder': ' تكلفة المتر المربع  '}),
+        }
+        labels = {
+            'document': 'إختر مستند التقييم',
+            'areaBuildCost': 'تكاليف مساحات البناء  ',
+            'priceMeterCost': 'تكلفة المتر المربع',
+        }
+
+class DamagedBuildingRateForm(forms.ModelForm):
+     class Meta:
+        model = models.DamagedBuildingRate
+        fields = ['normalAge', 'buildingAge', 'document']
+        widgets = {
+            'buildingAge': forms.NumberInput(
+                attrs={'id': 'buildingAgefield', 'class': 'form-control', 'placeholder': 'عمر البناء '}),
+            'normalAge':forms.NumberInput(
+                attrs={'id': 'normalAgefield', 'class': 'form-control', 'placeholder': 'عمر الأفتراضى للمبنى  '}),
+            'document': forms.Select(choices=Documents.objects.all().values_list()),
+          }
+        labels = {
+            'buildingAge': ' عمر البناء ',
+            'normalAge': 'عمر الأفتراضى للمبنى   ',
+            'document': 'إختر مستند التقييم ',
+        }
+

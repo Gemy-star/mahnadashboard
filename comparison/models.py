@@ -59,10 +59,48 @@ class CompareBuilding(models.Model):
     Compareaddress = models.CharField(max_length=255 , null=True , blank=True)
     CompareareaLevel =  models.SmallIntegerField(choices=AREAlEVEL , null=True , blank =True)
     residentBuilding = models.ForeignKey(ResidentBuilding , on_delete=models.CASCADE)
+    @property
+    def ResidentRaito(self):
+        return self.areaPrecentage + self.locationPrecentage + self.streetPrecentage + self.usagePrecentage
+    @property
+    def PureMeterPrice(self):
+        return (self.priceMeter * (self.ResidentRaito/100)) + self.priceMeter   
+
     def __str__(self) -> str:
         return str(self.pk)
 
 
+class DirectBuildingCost(models.Model):
+    document = models.ForeignKey(ResidentDocument , on_delete=models.CASCADE, unique=True)
+    areaBuildCost = models.IntegerField(null=True , blank=True)
+    priceMeterCost = models.IntegerField(null=True , blank=True)
+    def __str__(self) -> str:
+        return self.document.document.ownerName
+    @property
+    def TotalDirectCost(self):
+        return self.areaBuildCost + self.priceMeterCost
+
+class UndirectBuildingCost(models.Model):
+    document = models.ForeignKey(ResidentDocument , on_delete=models.CASCADE , unique=True)
+    technicalFees = models.IntegerField(null=True , blank=True)
+    developerFees = models.IntegerField(null=True , blank=True)
+    serviceFees = models.IntegerField(null=True , blank=True)
+    def __str__(self) -> str:
+        return self.document.document.ownerName
+    @property
+    def TotalUnDirectCost(self):
+        return self.developerFees + self.technicalFees + self.serviceFees
+
+
+class DamagedBuildingRate(models.Model):
+    document = models.ForeignKey(ResidentDocument , on_delete=models.CASCADE , unique=True)
+    buildingAge = models.IntegerField(null=True , blank=True)
+    normalAge = models.IntegerField(null=True , blank=True)
+    def __str__(self) -> str:
+        return self.document.document.ownerName
+    @property
+    def DamagedRate(self):
+        return self.buildingAge / self.normalAge
 
 
     

@@ -1,0 +1,321 @@
+{% extends 'masterpage.html' %} {% load static %} 
+{% block title %}
+لوحة التحكم
+{% endblock title %} 
+{% block body %}
+<section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+  <div
+    class="
+      bg-kheer
+      page-header
+      align-items-start
+      min-vh-90
+      pt-5
+      pb-11
+      m-3
+      border-radius-lg
+    "
+    style="background-image: url('../../../static/images/mahna.png')"
+  >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 text-center mx-auto pt-lg-8">
+          {% include 'partials/_menu.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {% include 'partials/_directMenu.html' %}
+
+{% if directCost.TotalDirectCost > 0 %}
+<div class="row pt-3 justify-content-center">
+    <div class="col-10">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6 class="text-center"></h6>
+          <p class="text-center"></p>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-12 col-12 d-flex justify-content-center">
+              <div class="table-responsive">
+                <table class="table align-items-center table-bordered">
+                  <thead class="bg-mahna" style="height: 2vh">
+                    <tr>
+                      <th
+                        scope="row"
+                        class="font-weight-bolder text-white text-center"
+                      >
+                     العقار المراد تقييمة
+                      </th>
+                      <th
+                      scope="row"
+                      class="font-weight-bolder text-white text-center"
+                    >
+                  </th>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <th scope="row" class="bg-mahna text-white text-center">
+                      تكاليف مسطحات البناء                  
+                      </th>
+                    <td scope="col">
+                      <p
+                        class="
+                          mb-0
+                          text-xxs
+                          txt-black
+                          text-align-center text-center
+                        "
+                      >
+                        {{ directCost.areaBuildCost }}
+                      </p>
+                    </td>
+                 
+                  </tr>
+                  <tr>
+                      <th scope="row" class="bg-mahna text-white text-center">
+                          تكلفة المتر المربع                  
+                        </th>
+                      <td scope="col">
+                        <p
+                          class="
+                            mb-0
+                            text-xxs
+                            txt-black
+                            text-align-center text-center
+                          "
+                        >
+                          {{ directCost.priceMeterCost }}
+                        </p>
+                      </td>
+                   
+                    </tr>
+                
+                    <tr>
+                      <th scope="row" class="bg-mahna text-white text-center">
+                          تكاليف البناء المباشر                  
+                        </th>
+                      <td scope="col">
+                        <p
+                          class="
+                            mb-0
+                            text-xxs
+                            txt-black
+                            text-align-center text-center
+                          "
+                        >
+                          {{ directCost.TotalDirectCost }}
+                        </p>
+                      </td>
+                   
+                    </tr>
+                 
+                
+                 
+              
+                 
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+ 
+
+    {% if unDirectCost.technicalFees > 0 %}
+    <div class="row pt-3 justify-content-center">
+        <div class="col-10">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6 class="text-center"></h6>
+              <p class="text-center"></p>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="row d-flex justify-content-center">
+                <div class="col-lg-12 col-12 d-flex justify-content-center">
+                  <div class="table-responsive">
+                      <table class="table align-items-center table-bordered">
+                          <thead class="bg-mahna" style="height: 2vh">
+                            <tr>
+                              <th
+                                scope="row"
+                                class="font-weight-bolder text-white text-center"
+                              >
+                             العقار المراد تقييمة
+                              </th>
+                              <th
+                              scope="row"
+                              class="font-weight-bolder text-white text-center"
+                              style="width:5rem;"
+                            >
+                          </th>
+                            </tr>
+                          </thead>
+                          <tr>
+                            <th scope="row" class="bg-mahna text-white text-center">
+                              رسوم مهنيه                  
+                              </th>
+                            <td scope="col" >
+                              <p
+                                class="
+                                  mb-0
+                                  text-xxs
+                                  txt-black
+                                  text-align-center text-center
+                                "
+                              >
+                                {{ unDirectCost.technicalFees }}
+                              </p>
+                            </td>
+                         
+                          </tr>
+                          <tr>
+                              <th scope="row" class="bg-mahna text-white text-center">
+                                  رسوم المرافق                    
+                                </th>
+                              <td scope="col">
+                                <p
+                                  class="
+                                    mb-0
+                                    text-xxs
+                                    txt-black
+                                    text-align-center text-center
+                                  "
+                                >
+                                  {{ unDirectCost.serviceFees }}
+                                </p>
+                              </td>
+                           
+                            </tr>
+                            <tr>
+                              <th scope="row" class="bg-mahna text-white text-center">
+                                  ربح المطور                  
+                                </th>
+                              <td scope="col">
+                                <p
+                                  class="
+                                    mb-0
+                                    text-xxs
+                                    txt-black
+                                    text-align-center text-center
+                                  "
+                                >
+                                  {{ unDirectCost.developerFees }}
+                                </p>
+                              </td>
+                           
+                            </tr>
+                            <tr>
+                              <th scope="row" class="bg-mahna text-white text-center">
+                                  تكاليف البناء الغير مباشر                  
+                                </th>
+                              <td scope="col">
+                                <p
+                                  class="
+                                    mb-0
+                                    text-xxs
+                                    txt-black
+                                    text-align-center text-center
+                                  "
+                                >
+                                  {{ unDirectCost.TotalUnDirectCost }}
+                                </p>
+                              </td>
+                           
+                            </tr>
+                         
+                        
+                         
+                      
+                         
+                          <tbody></tbody>
+                        </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+ {% if totalCost > 0 %}
+ <div class="row pt-2 justify-content-center">
+    <div class="col-10">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6 class="text-center"></h6>
+          <p class="text-center"></p>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-12 col-12 d-flex justify-content-center">
+              <div class="table-responsive">
+                  <table class="table align-items-center table-bordered">
+                      <thead class="bg-mahna" style="height: 2vh">
+                        <tr>
+                          <th
+                            scope="row"
+                            class="font-weight-bolder text-white text-center"
+                          >
+                         العقار المراد تقييمة
+                          </th>
+                          <th
+                          scope="row"
+                          class="font-weight-bolder text-white text-center w-lg-50"
+                        >
+                      </th>
+                        </tr>
+                      </thead>
+                      <tr>
+                        <th scope="row" class="bg-mahna text-white text-center">
+                           إجمالى تكاليف البناء                  
+                          </th>
+                        <td scope="col">
+                          <p
+                            class="
+                              mb-0
+                              text-xxs
+                              txt-black
+                              text-align-center text-center
+                            "
+                          >
+                            {{ totalCost }}
+                          </p>
+                        </td>
+                     
+                      </tr>   
+                      <tbody></tbody>
+                    </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ {% endif %}  
+ 
+  
+
+ 
+  </div>
+</section>
+{% endblock body %}
+{% block scripts%}
+{% endblock scripts %}
+{% block style %}
+<style>
+    td {
+        width:10rem !important;
+    }
+</style>
+{% endblock style %}
+
