@@ -8,7 +8,7 @@ from django.views import View
 from office.models import Documents , Preview
 from accounts.models import User
 from comparison.models import ResidentDocument
-
+from accountant.models import Voucher
 class EmailThread(threading.Thread):
     def __init__(self, email):
         self.email = email
@@ -24,6 +24,8 @@ class HomePage(View):
         context= {
             "documents":Documents.objects.all(),
             "previewcount": Preview.objects.all().count(),
-            "residentDocument":ResidentDocument.objects.all()
+            "residentDocument":ResidentDocument.objects.all(),
+            "vouchers":Voucher.objects.all()
+
         }
         return render(request, 'home-page.html' , context=context)

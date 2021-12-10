@@ -1,0 +1,101 @@
+<div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+    <a
+      href=""
+      style="cursor: pointer; text-decoration: none"
+    >
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <h4
+                  class="
+                    text-sm
+                    blue-khieer
+                    mb-0
+                    text-capitalize
+                    font-weight-bold
+                  "
+                >
+                  عدد الفواتير
+                </h4>
+              </div>
+            </div>
+            <div class="col-4 text-center">
+                <sapn>{{vouchers.count}}</span> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+
+  <div class="col-xl-8 col-sm-6 mb-xl-0 mb-4">
+    <div class="card mb-4">
+      <div class="card-header pb-0">
+        <h6 class="text-center">بيانات الفاتورة </h6>
+        <div class="row d-flex justify-content-center">
+          <div class="col-10">
+            <a
+              href="{% url 'add-voucher' %}"
+              class="btn btn-sm text-white bg-mahna"
+            >
+              تسجيل فاتورة
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive">
+          <table class="table align-items-center table-bordered">
+            <thead class="bg-mahna" style="height: 2vh">
+              <tr>
+                <th class="text-xxs font-weight-bolder text-white">رقم الفاتورة</th>
+                <th class="text-xxs text-white font-weight-bolder">'طريقة' السداد</th>
+                <th class="text-xxs font-weight-bolder text-white">تاريخ الفاتورة</th>
+                <th class="text-xxs font-weight-bolder text-white">
+                طباعة
+                </th>
+                <th class="text-xxs font-weight-bolder text-white">
+
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in vouchers %}
+              <tr>
+                <td>
+                  <p class="mb-0 text-xxs txt-black text-align-center">
+                    {{ item.voucherId }}
+                  </p>
+                </td>
+                <td>
+                  <p class="mb-0 text-xxs txt-black text-align-center">
+                    {{ item.payMethod }}
+                  </p>
+                </td>
+                <td>
+                  <p class="mb-0 text-xxs txt-black text-align-center">
+                    {{ item.voucherDate }}
+                  </p>
+                </td>
+                <td>
+                  <p class="mb-0 text-xxs txt-black text-align-center">
+                    <i class="fas fa-file-alt text-lg"></i>
+                  </p>
+                </td>
+                <td>
+                    <a href="{% url 'update-voucher' item.pk %}"  class="mb-0 text-xxs txt-black text-align-center">
+                        <i class="fas fa-pen text-lg text-success"></i>                  
+                      </a>
+                  </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+    

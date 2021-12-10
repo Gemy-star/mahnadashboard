@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'office',
     'comparison',
+    'accountant'
 ]
 
 MIDDLEWARE = [

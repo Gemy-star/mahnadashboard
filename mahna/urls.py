@@ -27,6 +27,8 @@ urlpatterns = [
     path('users/', include('accounts.urls')),
     path('office/', include('office.urls')),
     path('comparison/', include('comparison.urls')),
+    path('accountant/', include('accountant.urls')),
+
 ]
 
 
