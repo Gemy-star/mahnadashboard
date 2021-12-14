@@ -1,5 +1,5 @@
 from django import forms
-from . import models
+from office import models
 
 
 class ClientForm(forms.ModelForm):
@@ -8,7 +8,7 @@ class ClientForm(forms.ModelForm):
         fields = ['name', 'phone', 'authorizations', 'rights', 'benfits']
         widgets = {
             'name': forms.TextInput(
-                attrs={'id': 'namefield', 'class': 'form-control', 'placeholder': 'الأسم '}),
+                attrs={'id': 'namefield', 'class': 'form-control', 'placeholder': 'صاحب الطلب '}),
             'phone': forms.TextInput(
                 attrs={'id': 'phonefield', 'class': 'form-control', 'placeholder': 'الهاتف '}),
             'authorizations': forms.TextInput(
@@ -18,13 +18,20 @@ class ClientForm(forms.ModelForm):
             'benfits': forms.TextInput(
                 attrs={'id': 'benfitsfield', 'class': 'form-control', 'placeholder': 'المستفيدين من الأستخدام '}),
         }
+        labels = {
+            'name': 'صاحب الطلب ',
+            'phone': 'الهاتف',
+            'authorizations': ' الصلاحيات و الأختصاصات',
+            'rights': ' الحقوق و الأمتيازات العينينة ',
+            'benfits': 'المستفيدين من الأستخدام',
+        }
 
 
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = models.Documents
         fields = ['documentNumber','ownerPlace', 'ownerName', 'ownerNationalID', 'realStateType', 'paperNumber',
-                  'paperDate', 'area', 'buildingArea', 'ratingPurpose', 'client']
+                  'paperDate', 'area', 'buildingArea', 'ratingPurpose']
         labels = {
             'documentNumber':'رقم الطلب',
             'ownerPlace' : 'جهة صاحب الطلب' , 
@@ -36,7 +43,6 @@ class DocumentForm(forms.ModelForm):
             'area' : ' مساحة الأرض' , 
             'buildingArea' : ' مسطحات البناء' , 
             'ratingPurpose' : ' الغرض من التقييم' , 
-            'client' : ' العميل' , 
         }
         widgets = {
             'documentNumber':forms.TextInput(
@@ -59,7 +65,6 @@ class DocumentForm(forms.ModelForm):
                 attrs={'id': 'buildingAreafield', 'class': 'form-control', 'placeholder': 'مسطحات البناء'}),
             'ratingPurpose': forms.TextInput(
                 attrs={'id': 'ratingPurposefield', 'class': 'form-control', 'placeholder': ' الغرض من التقييم'}),
-            'client': forms.Select(choices=models.Clients.objects.all().values_list()),
         }
 
 

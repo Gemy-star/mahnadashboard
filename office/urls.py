@@ -12,4 +12,6 @@ urlpatterns = [
          views.UpdateDocument.as_view(), name='update-document'),
     path('previews/all', views.AllPreviews.as_view(), name='all-previews'),
     path('preview/add', views.AddPreview.as_view(), name='add-preview'),
+    path('documentAndClient/add', views.AddDocumentAndClient.as_view(), name='add-doc_client'),
+
 ]
