@@ -1,0 +1,358 @@
+
+
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>فاتورة{{ voucher.voucherId }}</title>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+
+        @font-face {
+            font-family: RTLFont;
+   src: url('C:\Work\External\MahnaDashboard\mahnadashboard\static\css\fonts\helveticaneuelt-arabic-55-roman.ttf')
+        }
+body {
+font-family: RTLFont;}
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 5px;
+            background-color: #fff;
+        }
+
+        .table th,
+        .table td {
+            padding: 5px;
+            vertical-align: top;
+            border: 1px solid #000;
+            text-align: center;
+                        width: auto !important;
+
+        }
+        .table tbody td {
+            height:50px;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border: 1px solid #000;
+            background-color: #EFEFEF;
+            color: #000000;
+            font-weight: 900;
+        }
+
+        .table tbody + tbody {
+            border: 1px solid #000;
+
+        }
+
+        .table  {
+            background-color: #ffffff;
+        }
+
+        .list-group {
+            display: block;
+            width: 100%;
+            float: right;
+            list-style: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+
+   .card-body{
+       width: fit-content;
+   }
+        .list-group p {
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            list-style: none;
+            font-size: 1.1em;
+        }
+
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #333;
+            /* old IE */
+            background-color: #fff;
+            /* Modern Browsers */
+            padding: 3rem;
+        }
+        .table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+}
+  .text-center {
+      text-align:center;
+  }
+  .text-right {
+      text-align: right;
+  }
+    .text-left {
+      text-align: left;
+  }
+    .red-color{
+        color: #CC3434;
+        font-weight: bolder;
+    }
+    .header{
+        font-weight: 900;
+        font-size:25px;
+    }
+    .black-color {
+        color: #000000;
+        font-weight: lighter;
+    }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+                                        <pdf:language name="arabic"/>
+            <p class="text-center header">فاتورة مبيعات</p>
+    <hr class="hrItem"/>
+        </div>
+                            <pdf:language name="arabic"/>
+ <table class="table-borderless">
+     <tbody>
+     <tr>
+          <td>
+            <p class="black-color">
+                 {{ voucher.voucherId }}
+            </p>
+         </td>
+         <td>
+             <p class="red-color">
+                             رقم الفاتورة
+             </p>
+         </td>
+
+
+         <td>
+             {{ voucher.recordId }}
+         </td>
+         <td>
+             <p class="red-color">
+                 رقم القيد
+             </p>
+         </td>
+            <td>
+            <p>
+                 {{ voucher.taxCompanyNumber }}
+            </p>
+         </td>
+         <td>
+            <p class="red-color">
+                الرقم الضريبى للشركة
+            </p>
+         </td>
+     </tr>
+        <tr>
+          <td>
+            <p class="black-color">
+                 {{ voucher.voucherDate  | date:"d/m/Y" }}
+            </p>
+         </td>
+         <td>
+             <p class="red-color">
+                             تاريخ الفاتورة
+             </p>
+         </td>
+
+
+         <td>
+                         <p class="black-color">
+             {{ voucher.payMethod }}
+                         </p>
+         </td>
+         <td>
+             <p class="red-color">
+                 طريقة السداد
+             </p>
+         </td>
+            <td>
+            <p class="black-color">
+                 {{ voucher.companyAddress }}
+            </p>
+         </td>
+         <td>
+            <p class="red-color">
+                عنوان الشركة
+            </p>
+         </td>
+     </tr>
+     <tr>
+         <td>
+             <p class="black-color">{{ voucher.voucherDescription }}</p>
+         </td>
+             <td>
+             <p class="red-color"> بيان الفاتورة </p>
+         </td>
+     </tr>
+          <tr>
+          <td>
+            <p class="black-color">
+                 {{ voucher.clientName }}
+            </p>
+         </td>
+         <td>
+             <p class="red-color">
+                            اسم العميل
+             </p>
+         </td>
+
+
+         <td>
+             {{ voucher.clientPhone }}
+         </td>
+         <td>
+             <p class="red-color">
+                هاتف العميل
+             </p>
+         </td>
+            <td>
+            <p>
+                 {{ voucher.clientTaxNumber }}
+            </p>
+         </td>
+         <td>
+            <p class="red-color">
+                الرقم الضريبى للعميل
+            </p>
+         </td>
+     </tr>
+      <tr>
+         <td>
+             <p class="black-color">{{ voucher.clientAddress }}</p>
+         </td>
+             <td>
+             <p class="red-color"> عنوان العميل </p>
+         </td>
+     </tr>
+     </tbody>
+ </table>
+<br>
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                            <pdf:language name="arabic"/>
+                <th style="width:55px;">م</th>
+                <th style="width:70px;">رمز الصنف</th>
+                <th >الوصف</th>
+                <th>المبلغ قبل الضريبة %</th>
+                <th>معدل الضريبة %</th>
+                                <th>معدل الضريبة </th>
+                                <th>المبلغ الأجمالى</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ voucher.voucherId}}</td>
+                    <td>{{ voucher.voucherCode }}</td>
+                    <td>{{ voucher.voucherDescription }}</td>
+                                        <td>{{ voucher.totalBeforeTax}}</td>
+                    <td>{{ voucher.taxRatio}}</td>
+                    <td>{{ voucher.TotaltaxCost}}</td>
+                    <td>{{ voucher.Totalpay}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+     <div class="card">
+         <div class="card-body">
+                <table class="table-borderless" style="border: 1px solid black;width: 100px">
+          <tbody>
+            <tr>
+                <td>
+                    <p class="black-color">{{ voucher.totalBeforeTax }}</p>
+                </td>
+                  <td>
+                    <p class="black-color">الأجمالى قبل الفاتورة</p>
+                </td>
+            </tr>
+          <tr>
+                <td>
+                    <p class="black-color">{{ voucher.TotaltaxCost }}</p>
+                </td>
+                  <td>
+                    <p class="black-color">ضريبة القيمة المضافة</p>
+                </td>
+            </tr>
+           <tr>
+                <td>
+                    <p class="black-color">{{ voucher.Totalpay }}</p>
+                </td>
+                  <td>
+                    <p class="black-color">الأجمالى بعد الفاتورة</p>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+         </div>
+     </div>
+    </div>
+    <br>
+    <br>
+     <table class="table-borderless">
+     <tbody>
+
+      <tr>
+               <td>
+             <p class="red-color"> المستلم </p>
+         </td>
+          <td>
+
+          </td>
+         <td>
+             <p class="black-color">             <p class="red-color"> الموظف المسئول </p></p>
+         </td>
+
+     </tr>
+      <tr>
+         <td>
+             <p class="black-color"></p>
+         </td>
+             <td>
+             <p class="red-color">  </p>
+         </td>
+                <td>
+             <p class="black-color">{{ user.first_name }} {{ user.last_name }} </p>
+         </td>
+     </tr>
+        <tr>
+         <td>
+             <p class="black-color"></p>
+         </td>
+             <td>
+             <p class="red-color">  </p>
+         </td>
+                <td>
+             <p class="red-color">  </p>
+         </td>
+     </tr>
+     </tbody>
+ </table>
+</div>
+
+
+</body>
+</html>
+
+

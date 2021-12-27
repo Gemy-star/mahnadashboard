@@ -32,4 +32,5 @@ urlpatterns = [
          name='add-residentBuilding'),
     path('residentBuilding/update/<int:pk>',
          views.UpdateResidentBuilding.as_view(), name='update-residentBuilding'),
+
 ]

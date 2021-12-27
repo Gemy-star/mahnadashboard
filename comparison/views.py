@@ -155,3 +155,7 @@ class UpdateDamaged(UpdateView):
     template_name = 'comparison/damagedBuildingRate/EditDamaged.html'
     def get_success_url(self):
         return reverse('home-page')
+
+
+
+       

@@ -6,4 +6,6 @@ urlpatterns = [
          views.UpdateVoucher.as_view(), name='update-voucher'),
     path('add/voucher',
          views.AddVoucher.as_view(), name='add-voucher'),
+   path('voucher/report/<int:pk>',
+         views.VoucherReport.as_view(), name='voucher-report'),
 ]

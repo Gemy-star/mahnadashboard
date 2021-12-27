@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'office',
     'comparison',
-    'accountant'
+    'accountant',
+    'xhtml2pdf'
 ]
 
 MIDDLEWARE = [
@@ -123,7 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
