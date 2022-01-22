@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+{% load static %}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <link rel="apple-touch-icon" sizes="76x76"href="{% static 'images/logo.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+  <title>
+   {% block title %} {{ object.clientName }} فاتورة{% endblock title %}
+   </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static 'css/soft-ui-dashboard.css' %}" rel="stylesheet" />
+        <link id="pagestyle" href="{% static 'css/soft-ui-dashboard.css.map' %}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+      .text-right {
+      text-align: right;
+  }
+    .text-left {
+      text-align: left;
+  }
+      .black-color {
+        color: #000000;
+        font-weight: 600;
+    }
+         .red-color{
+        color: #CC3434;
+        font-weight: bolder;
+    }
+</style>
+</head>
+<body class="g-sidenav-show" style="background-color: #ffffff">
+<div class="container-fluid">
+    <div class="row d-flex flex-row justify-content-between">
+        <div class="col-4 p-lg-6 pt-2">
+            <img src="{{ object.qrcode.url }}" class="w-50"/>
+        </div>
+          <div class="col-4 justify-content-center p-lg-6 pt-2 mt-lg-6 text-center">
+            <img src="{% static 'images/logo.svg' %}" class="w-50"/>
+        </div>
+        <div class="col-4 p-lg-6 pt-2 mt-lg-10">
+            <p class="text-bolder text-black-50" style="white-space: nowrap; text-align: left">فاتورة مبيعات</p>
+        </div>
+    </div>
+<div class="card">
+        <div class="card-header">
+    <hr/>
+        </div>
+      <div class="d-sm-none d-lg-grid table-responsive-sm">
+          <table class="table-borderless">
+     <tbody>
+     <tr>
+          <td>
+            <p class="black-color">
+                 {{ object.voucherId }}
+            </p>
+         </td>
+         <td>
+             <p class="red-color">
+                             رقم الفاتورة
+             </p>
+         </td>
+
+
+         <td>
+             {{ object.recordId }}
+         </td>
+         <td>
+             <p class="red-color">
+                 رقم القيد
+             </p>
+         </td>
+            <td>
+            <p>
+                 {{ object.taxCompanyNumber }}
+            </p>
+         </td>
+         <td>
+            <p class="red-color">
+                الرقم الضريبى للشركة
+            </p>
+         </td>
+     </tr>
+        <tr>
+          <td>
+            <p class="black-color">
+                 {{ object.voucherDate  | date:"d/m/Y" }}
+            </p>
+         </td>
+         <td>
+             <p class="red-color">
+                             تاريخ الفاتورة
+             </p>
+         </td>
+
+
+         <td>
+                         <p class="black-color">
+             {{ object.payMethod }}
+                         </p>
+         </td>
+         <td>
+             <p class="red-color">
+                 طريقة السداد
+             </p>
+         </td>
+            <td>
+            <p class="black-color">
+                 {{ object.companyAddress }}
+            </p>
+         </td>
+         <td>
+            <p class="red-color">
+                عنوان الشركة
+            </p>
+         </td>
+     </tr>
+     <tr>
+         <td>
+             <p class="black-color">{{ object.voucherDescription }}</p>
+         </td>
+             <td>
+             <p class="red-color"> بيان الفاتورة </p>
+         </td>
+     </tr>
+          <tr>
+          <td>
+            <p class="black-color">
+                 {{ object.clientName }}
+            </p>
+         </td>
+         <td>
+             <p class="red-color">
+                            اسم العميل
+             </p>
+         </td>
+
+
+         <td>
+             {{ object.clientPhone }}
+         </td>
+         <td>
+             <p class="red-color">
+                هاتف العميل
+             </p>
+         </td>
+            <td>
+            <p>
+                 {{ object.clientTaxNumber }}
+            </p>
+         </td>
+         <td>
+            <p class="red-color">
+                الرقم الضريبى للعميل
+            </p>
+         </td>
+     </tr>
+      <tr>
+         <td>
+             <p class="black-color">{{ object.clientAddress }}</p>
+         </td>
+             <td>
+             <p class="red-color"> عنوان العميل </p>
+         </td>
+     </tr>
+     </tbody>
+ </table>
+      </div>
+<br>
+        <br>
+                <div class="table-responsive-sm">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th style="width:55px;">م</th>
+                <th style="width:70px;">رمز الصنف</th>
+                <th >الوصف</th>
+                <th>المبلغ قبل الضريبة %</th>
+                <th>معدل الضريبة %</th>
+                                <th>معدل الضريبة </th>
+                                <th>المبلغ الأجمالى</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ object.objectId}}</td>
+                    <td>{{ object.objectCode }}</td>
+                    <td>{{ object.objectDescription }}</td>
+                                        <td>{{ object.totalBeforeTax}}</td>
+                    <td>{{ object.taxRatio}}</td>
+                    <td>{{ object.TotaltaxCost}}</td>
+                    <td>{{ object.Totalpay}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+                </div>
+        <br>
+        <br>
+     <div class="card">
+         <div class="card-body">
+            <div class="table-responsive-sm">
+                    <table class="table-borderless">
+          <tbody>
+            <tr>
+                <td>
+                    <p class="black-color">{{ object.totalBeforeTax }}</p>
+                </td>
+                  <td>
+                    <p class="black-color">الأجمالى قبل الفاتورة</p>
+                </td>
+            </tr>
+          <tr>
+                <td>
+                    <p class="black-color">{{ object.TotaltaxCost }}</p>
+                </td>
+                  <td>
+                    <p class="black-color">ضريبة القيمة المضافة</p>
+                </td>
+            </tr>
+           <tr>
+                <td>
+                    <p class="black-color">{{ object.Totalpay }}</p>
+                </td>
+                  <td>
+                    <p class="black-color">الأجمالى بعد الفاتورة</p>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+            </div>
+         </div>
+     </div>
+    </div>
+     <div class="card">
+            <div class="d-lg-grid table-responsive-sm">
+         <table class="table-borderless">
+     <tbody>
+
+      <tr>
+               <td>
+             <p class="red-color"> المستلم </p>
+         </td>
+          <td>
+          </td>
+         <td>
+              <p class="red-color"> الموظف المسئول </p>
+         </td>
+
+     </tr>
+      <tr>
+         <td>
+             <p class="black-color">-------------</p>
+         </td>
+             <td>
+             <p class="red-color">  </p>
+         </td>
+                <td>
+             <p class="black-color">...................... </p>
+         </td>
+     </tr>
+        <tr>
+         <td>
+             <p class="black-color"></p>
+         </td>
+             <td>
+             <p class="red-color">  </p>
+         </td>
+                <td>
+             <p class="red-color">  </p>
+         </td>
+     </tr>
+     </tbody>
+ </table>
+    </div>
+     </div>
+
+</div>
+
+
+
+<script src="{% static 'js/core/popper.min.js' %}"></script>
+  <script src="{% static 'js/core/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/plugins/perfect-scrollbar.min.js' %}"></script>
+  <script src="{% static 'js/plugins/smooth-scrollbar.min.js' %}"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{% static 'js/soft-ui-dashboard.min.js' %}"></script>
+{% block scripts %}  {% endblock scripts %}
+</body>
+</html>

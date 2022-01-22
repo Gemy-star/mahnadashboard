@@ -12,7 +12,8 @@ class ClientForm(forms.ModelForm):
             'phone': forms.TextInput(
                 attrs={'id': 'phonefield', 'class': 'form-control', 'placeholder': 'الهاتف '}),
             'authorizations': forms.TextInput(
-                attrs={'id': 'authorizationsfield', 'class': 'form-control', 'placeholder': ' الصلاحيات و الأختصاصات  '}),
+                attrs={'id': 'authorizationsfield', 'class': 'form-control',
+                       'placeholder': ' الصلاحيات و الأختصاصات  '}),
             'rights': forms.TextInput(
                 attrs={'id': 'rightsfield', 'class': 'form-control', 'placeholder': 'الحقوق و الأمتيازات العينينة '}),
             'benfits': forms.TextInput(
@@ -30,23 +31,24 @@ class ClientForm(forms.ModelForm):
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = models.Documents
-        fields = ['documentNumber','ownerPlace', 'ownerName', 'ownerNationalID', 'realStateType', 'paperNumber',
+        fields = ['documentNumber', 'ownerPlace', 'ownerName', 'ownerNationalID', 'realStateType', 'paperNumber',
                   'paperDate', 'area', 'buildingArea', 'ratingPurpose']
         labels = {
-            'documentNumber':'رقم الطلب',
-            'ownerPlace' : 'جهة صاحب الطلب' , 
-            'ownerName' : ' إسم المالك' , 
-            'ownerNationalID' : ' هوية المالك' , 
-            'realStateType' : ' نوع العقار' , 
-            'paperNumber' : ' رقم الصك' , 
-            'paperDate' : ' تاريخ الصك' , 
-            'area' : ' مساحة الأرض' , 
-            'buildingArea' : ' مسطحات البناء' , 
-            'ratingPurpose' : ' الغرض من التقييم' , 
+            'documentNumber': 'رقم الطلب',
+            'ownerPlace': 'جهة صاحب الطلب',
+            'ownerName': ' إسم المالك',
+            'ownerNationalID': ' هوية المالك',
+            'realStateType': ' نوع العقار',
+            'paperNumber': ' رقم الصك',
+            'paperDate': ' تاريخ الصك',
+            'area': ' مساحة الأرض',
+            'buildingArea': ' مسطحات البناء',
+            'ratingPurpose': ' الغرض من التقييم',
         }
         widgets = {
-            'documentNumber':forms.TextInput(
-                attrs={'id': 'ownerPlacefield','readonly':True, 'class': 'form-control', 'placeholder': 'جهة صاحب الطلب '}),
+            'documentNumber': forms.TextInput(
+                attrs={'id': 'ownerPlacefield', 'readonly': True, 'class': 'form-control',
+                       'placeholder': 'جهة صاحب الطلب '}),
             'ownerPlace': forms.TextInput(
                 attrs={'id': 'ownerPlacefield', 'class': 'form-control', 'placeholder': 'جهة صاحب الطلب '}),
             'ownerName': forms.TextInput(
@@ -68,30 +70,33 @@ class DocumentForm(forms.ModelForm):
         }
 
 
-
 class PreviewForm(forms.ModelForm):
     class Meta:
         model = models.Preview
         fields = ['locationUrl', 'locationDescription', 'locationState', 'locationLevel', 'FinishType',
-        'structureType','locationAge' , 'document'
-        ]
+                  'structureType', 'locationAge', 'document', 'lat', 'lang'
+                  ]
         widgets = {
             'locationUrl': forms.URLInput(
                 attrs={'id': 'LocationUrlfield', 'class': 'form-control', 'placeholder': 'رابط الموقع'}),
             'locationState': forms.Select(choices=models.Preview.LOCATION_STATUS,
-                                   attrs={'id': 'locationStatefield', 'class': 'form-control'}),
+                                          attrs={'id': 'locationStatefield', 'class': 'form-control'}),
             'locationDescription': forms.TextInput(
                 attrs={'id': 'locationDescriptionfield', 'class': 'form-control', 'placeholder': 'الوصف'}),
-             'locationAge': forms.NumberInput(
+            'locationAge': forms.NumberInput(
                 attrs={'id': 'LocationDescriptionfield', 'class': 'form-control', 'placeholder': 'عمر العقار '}),
+            'lat': forms.NumberInput(
+                attrs={'id': 'latfield', 'class': 'form-control', 'placeholder': 'خط العرض '}),
+            'lang': forms.NumberInput(
+                attrs={'id': 'langfield', 'class': 'form-control', 'placeholder': 'خط الطول '}),
             'locationLevel': forms.Select(choices=models.Preview.ZONE_LEVEL,
-                                       attrs={'id': 'locationLevelfield', 'class': 'form-control'}),
+                                          attrs={'id': 'locationLevelfield', 'class': 'form-control'}),
             'FinishType': forms.Select(choices=models.Preview.FINISHING,
-                                      attrs={'id': 'FinishTypefield', 'class': 'form-control'}),
+                                       attrs={'id': 'FinishTypefield', 'class': 'form-control'}),
             'structureType': forms.Select(choices=models.Preview.STRUCTURE_TYPE,
-                                      attrs={'id': 'STRUCTURE_TYPEfield', 'class': 'form-control'}),                          
-             'document': forms.Select(choices=models.Documents.objects.all(),
-                                      attrs={'id': 'documentfield', 'class': 'form-control'}),                          
+                                          attrs={'id': 'STRUCTURE_TYPEfield', 'class': 'form-control'}),
+            'document': forms.Select(choices=models.Documents.objects.all(),
+                                     attrs={'id': 'documentfield', 'class': 'form-control'}),
         }
         labels = {
             'locationUrl': 'رابط الموقع',
@@ -102,12 +107,15 @@ class PreviewForm(forms.ModelForm):
             'structureType': 'نوع الهيكل الأنشائى ',
             'locationAge': 'عمر العقار ',
             'document': 'إختر رقم الطلب ',
+            'lat':'خط العرض',
+            'lang': 'خط الطول',
 
         }
+
 
 class ImageForm(forms.ModelForm):
     image = forms.ImageField(label='صور الموقع')
 
     class Meta:
         model = models.LocationImages
-        fields = ['image']        
+        fields = ['image']

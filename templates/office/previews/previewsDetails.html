@@ -1,0 +1,53 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}لوحة التحكم {% endblock title %}
+
+{% block body %}
+    <section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+        <div class=" bg-kheer page-header align-items-start min-vh-90 pt-5 pb-11 m-3 border-radius-lg"
+             style="background-image: url('../../../static/images/mahna.png')">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 text-center mx-auto pt-lg-5">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            {% include 'partials/_menu.html' %}
+
+            <div class="row pt-3 justify-content-center">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6 class="text-center"> معاينة للموقع</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                              <div class="row pt-3">
+                                  <div class="col-lg-4 col-12">
+                                      <h4>رابط الموقع</h4>
+                                  </div>
+                                  <div class="col-lg-8 col-12">
+                                      <p>{{ object.locationUrl }}</p>
+                                  </div>
+                              </div>
+
+                                <div class="row pt-3">
+                                  <div class="col-lg-4 col-12">
+                                      <h4>وصف الموقع</h4>
+                                  </div>
+                                  <div class="col-lg-8 col-12">
+                                      <p>{{ object.locationDescription }}</p>
+                                  </div>
+                              </div>
+
+                                <div class="row pt-3">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58034.93991555644!2d{{ object.lat }}!3d{{ object.lang }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e292bcbdbace565%3A0xbeb6a4d1b45fcca8!2z2KXYs9iq2LHYp9it2Kkg2KfZhNit2KfZhdiv!5e0!3m2!1sen!2seg!4v1641743028686!5m2!1sen!2seg" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

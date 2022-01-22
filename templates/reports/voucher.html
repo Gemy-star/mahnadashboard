@@ -10,7 +10,14 @@
             size: A4;
             margin: 1cm;
         }
-
+  .qrcode {
+      width: 100px !important;
+      height: 100px;
+  }
+          .logo {
+      width: 200px !important;
+      height: 80px
+  }
         @font-face {
             font-family: RTLFont;
    src: url('C:\Work\External\MahnaDashboard\mahnadashboard\static\css\fonts\helveticaneuelt-arabic-55-roman.ttf')
@@ -121,10 +128,32 @@ font-family: RTLFont;}
 <div class="container">
     <div class="card">
         <div class="card-header">
+            <table class="table-borderless">
+                <tbody>
+                <tr>
+                        <td>
                                         <pdf:language name="arabic"/>
             <p class="text-center header">فاتورة مبيعات</p>
+                    </td>
+                <td></td>
+                    <td>
+                    <img src="C:\Work\External\MahnaDashboard\mahnadashboard\static\images\logo.png" class="logo">
+                    </td>
+                                    <td></td>
+
+                 <td>
+                    <img src="C:\Work\External\MahnaDashboard\mahnadashboard\static\images\{{ voucher.qrcode.name }}" class="qrcode">
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+     <br>
     <hr class="hrItem"/>
         </div>
+             <br>
+     <br>
+  <br>
                             <pdf:language name="arabic"/>
  <table class="table-borderless">
      <tbody>
@@ -327,13 +356,13 @@ font-family: RTLFont;}
      </tr>
       <tr>
          <td>
-             <p class="black-color"></p>
+             <p class="black-color">..............</p>
          </td>
              <td>
              <p class="red-color">  </p>
          </td>
                 <td>
-             <p class="black-color">{{ user.first_name }} {{ user.last_name }} </p>
+             <p class="black-color">....................</p>
          </td>
      </tr>
         <tr>

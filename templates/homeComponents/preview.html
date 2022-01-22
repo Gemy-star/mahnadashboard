@@ -58,6 +58,8 @@
               <th class="text-xxs font-weight-bolder text-white">
                 تاريخ المستند
               </th>
+                   <th class="text-xxs font-weight-bolder text-white">
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -83,6 +85,9 @@
                   {{ item.dateEntered }}
                 </p>
               </td>
+            <td>
+                <a href="{% url 'previews-details' item.pk %}" class="btn btn-success bg-maal text-white">التفاصيل</a>
+            </td>
             </tr>
             {% endfor %}
           </tbody>

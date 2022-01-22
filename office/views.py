@@ -9,6 +9,9 @@ from office import models
 from office import forms
 from mahna.views import EmailThread
 from django.forms import modelformset_factory
+from django.views.generic.detail import DetailView
+from django.utils import timezone
+
 
 
 class AddDocumentAndClient(View):
@@ -116,3 +119,14 @@ class AllPreviews(View):
     def get(self, request):
         data = models.Preview.objects.all()
         return render(request, 'office/previews/allpreviews.html', context={"data": data})
+
+
+class PreviewDetails(DetailView):
+    model = models.Preview
+    template_name = 'office/previews/previewsDetails.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+

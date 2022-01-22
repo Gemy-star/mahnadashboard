@@ -44,7 +44,7 @@ class Documents(models.Model):
     area = models.IntegerField(null=True, blank=True)
     buildingArea = models.IntegerField(null=True, blank=True)
     ratingPurpose = models.TextField(null=True, blank=True)
-    client = models.ForeignKey(Clients, on_delete=models.CASCADE,null=True)
+    client = models.ForeignKey(Clients, on_delete=models.CASCADE, null=True)
     enteredBy = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     dateEntered = models.DateTimeField(auto_now=True, auto_created=True)
 
@@ -78,6 +78,8 @@ class Preview(models.Model):
     FinishType = models.SmallIntegerField(choices=FINISHING, null=True)
     structureType = models.SmallIntegerField(choices=STRUCTURE_TYPE, null=True)
     locationAge = models.SmallIntegerField(null=True, blank=True)
+    lat = models.FloatField(null=True, blank=True)
+    lang = models.FloatField(null=True, blank=True)
     document = models.ForeignKey(Documents, on_delete=models.CASCADE)
 
     def __str__(self):
