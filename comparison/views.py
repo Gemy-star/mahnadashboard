@@ -1,21 +1,34 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse
 from comparison import models
 from comparison import forms
+from office.models import Preview
 
 
 # Create your views here.
 
+class AddResidentDocument(View):
+    form = forms.ResidentDocumentForm
 
-class AddResidentDocument(CreateView):
-    model = models.ResidentDocument
-    form_class = forms.ResidentDocumentForm
-    template_name = 'comparison/residentDocument/AddResidentDocument.html'
+    def get(self, request, pk):
+        return render(request, 'comparison/residentDocument/AddResidentDocument.html',
+                      context={'form': self.form})
 
-    def get_success_url(self):
-        return reverse('home-page')
+    def post(self, request, pk):
+        form = forms.ResidentDocumentForm(request.POST)
+        if form.is_valid():
+            post_form = form.save(commit=False)
+            prev = Preview.objects.get(pk=pk)
+            post_form.previews = prev
+            post_form.save()
+            messages.success(request,
+                             "لقد تمت العملية بنجاح")
+            return redirect('home-page')
+
+
 
 
 def SetResidentCompleted(request, pk):

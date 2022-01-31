@@ -7,17 +7,16 @@ from office.models import Preview
 class ResidentDocumentForm(forms.ModelForm):
     class Meta:
         model = models.ResidentDocument
-        fields = ['residentRate', 'valueBase', 'previews']
+        fields = ['residentRate', 'valueBase']
+        exclude = ['previews', ]
         widgets = {
             'residentRate': forms.TextInput(
                 attrs={'id': 'residentRatefield', 'class': 'form-control', 'placeholder': 'الغرض من التقيم '}),
             'valueBase': forms.Select(choices=models.ResidentDocument.VALUE_BASE),
-            'document': forms.Select(choices=Preview.objects.all().values_list()),
         }
         labels = {
             'residentRate': 'الغرض من التقييم',
             'valueBase': 'أساس القيمة  ',
-            'previews': 'إختر رقم الطلب ',
         }
 
 

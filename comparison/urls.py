@@ -22,7 +22,7 @@ urlpatterns = [
          name='add-undirect'),
     path('residentDocument/update/<int:pk>',
          views.UpdateResidentDocument.as_view(), name='update-residentDocument'),
-    path('residentDocument/add', views.AddResidentDocument.as_view(),
+    path('residentDocument/add/<int:pk>', views.AddResidentDocument.as_view(),
          name='add-residentDocument'),
     path('compareDocument/add', views.AddCompareBuilding.as_view(),
          name='add-compareDocument'),

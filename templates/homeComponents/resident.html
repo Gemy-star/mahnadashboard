@@ -165,16 +165,6 @@
   <div class="card mb-4">
     <div class="card-header pb-0">
       <h6 class="text-center">بيانات مستند عقارى</h6>
-      <div class="row d-flex justify-content-center">
-        <div class="col-10">
-          <a
-            href="{% url 'add-residentDocument' %}"
-            class="btn btn-sm text-white bg-mahna"
-          >
-            تقييم
-          </a>
-        </div>
-      </div>
     </div>
     <div class="card-body px-0 pt-0 pb-2">
       <div class="table-responsive">
@@ -187,6 +177,9 @@
               <th class="text-xxs font-weight-bolder text-white">
                 تاريخ المستند
               </th>
+                <th>
+
+                </th>
             </tr>
           </thead>
           <tbody>
@@ -212,6 +205,9 @@
                   {{ item.document.dateEntered }}
                 </p>
               </td>
+            <td>
+               <a href="{% url 'add-residentDocument' item.pk %}" class="btn btn-rounded btn-primary text-white bg-maal">تقييم</a>
+            </td>
             </tr>
             {% endfor %}
           </tbody>
