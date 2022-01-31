@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse
@@ -16,6 +16,13 @@ class AddResidentDocument(CreateView):
 
     def get_success_url(self):
         return reverse('home-page')
+
+
+def SetResidentCompleted(request, pk):
+    resident = models.ResidentDocument.objects.get(pk=pk)
+    resident.completed = True
+    resident.save()
+    return redirect('home-page')
 
 
 class UpdateResidentDocument(UpdateView):

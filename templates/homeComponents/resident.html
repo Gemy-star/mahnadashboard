@@ -1,5 +1,6 @@
 <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-  <a
+ <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
+      <a
     href=""
     style="cursor: pointer; text-decoration: none"
   >
@@ -22,17 +23,15 @@
             </div>
           </div>
           <div class="col-4 text-center">
-              <sapn>{{documents.count}}</span> 
+              <sapn>{{dcoument_all.count}}</span>
           </div>
         </div>
       </div>
     </div>
   </a>
-</div>
-
-
-<div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-  <a
+ </div>
+     <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4 pt-2">
+           <a
     href=""
     style="cursor: pointer; text-decoration: none"
   >
@@ -50,21 +49,118 @@
                   font-weight-bold
                 "
               >
-                عدد المعاينات
+                 عدد المعاينات
               </h4>
             </div>
           </div>
           <div class="col-4 text-center">
-              <sapn>{{previewcount}}</span> 
+              <sapn>{{previews.count}}</span>
           </div>
         </div>
       </div>
     </div>
   </a>
+     </div>
+
+
+    <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4 pt-2">
+           <a
+    href=""
+    style="cursor: pointer; text-decoration: none"
+  >
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+              <h4
+                class="
+                  text-sm
+                  blue-khieer
+                  mb-0
+                  text-capitalize
+                  font-weight-bold
+                "
+              >
+                  فى إنتظار المعاينة
+              </h4>
+            </div>
+          </div>
+          <div class="col-4 text-center">
+              <sapn>{{documents_for_preview.count}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+     </div>
+    <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4 pt-2">
+           <a
+    href=""
+    style="cursor: pointer; text-decoration: none"
+  >
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+              <h4
+                class="
+                  text-sm
+                  blue-khieer
+                  mb-0
+                  text-capitalize
+                  font-weight-bold
+                "
+              >
+                  فى إنتظار التقييم
+              </h4>
+            </div>
+          </div>
+          <div class="col-4 text-center">
+              <sapn>{{prev_comp.count}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+     </div>
+    <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4 pt-2">
+           <a
+    href=""
+    style="cursor: pointer; text-decoration: none"
+  >
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+              <h4
+                class="
+                  text-sm
+                  blue-khieer
+                  mb-0
+                  text-capitalize
+                  font-weight-bold
+                "
+              >
+                مرسلة
+              </h4>
+            </div>
+          </div>
+          <div class="col-4 text-center">
+              <sapn>{{resident_ready.count}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+     </div>
 </div>
 
 
-<div class="row pt-3">
+<div class="col-xl-8 col-sm-6 mb-xl-0 mb-4">
+<div class="row">
 <div class="col-xl-11 col-sm-11 mb-xl-0 mb-4">
   <div class="card mb-4">
     <div class="card-header pb-0">
@@ -94,26 +190,26 @@
             </tr>
           </thead>
           <tbody>
-            {% for item in documents %}
+            {% for item in prev_comp %}
             <tr>
               <td>
                 <p class="mb-0 text-xxs txt-black text-align-center">
-                  {{ item.documentNumber }}
+                  {{ item.document.documentNumber }}
                 </p>
               </td>
               <td>
                 <p class="mb-0 text-xxs txt-black text-align-center">
-                  {{ item.get_realStateType_display }}
+                  {{ item.document.get_realStateType_display }}
                 </p>
               </td>
               <td>
                 <p class="mb-0 text-xxs txt-black text-align-center">
-                  {{ item.ownerPlace }}
+                  {{ item.document.ownerPlace }}
                 </p>
               </td>
               <td>
                 <p class="mb-0 text-xxs txt-black text-align-center">
-                  {{ item.dateEntered }}
+                  {{ item.document.dateEntered }}
                 </p>
               </td>
             </tr>
@@ -126,11 +222,8 @@
 </div>
 </div>
 
-
-
-
-
-<div class="row pt-3">
+</div>
+<div class="row pt-3 justify-content-center">
 <div class="col-xl-11 col-sm-11 mb-xl-0 mb-4">
   <div class="card mb-4">
     <div class="card-header pb-0">
@@ -150,10 +243,12 @@
                 <th class="text-xxs font-weight-bolder text-white text-center">
                نوع المقارنه
               </th>
+                   <th class="text-xxs font-weight-bolder text-white text-center">
+              </th>
             </tr>
           </thead>
           <tbody>
-            {% for item in residentDocument %}
+            {% for item in residentDocument_not %}
             <tr>
               <td>
                 <p class="mb-0 text-xxs txt-black text-align-center text-center">
@@ -195,6 +290,15 @@
            تكلفة الأهلاك
           </a>
               </td>
+                <td>
+
+                 <a
+            href="{% url 'set_resident_complete' item.pk %}"
+            class="btn btn-sm text-white bg-mahna"
+          >
+           إرسال
+          </a>
+              </td>
             </tr>
             {% endfor %}
           </tbody>
@@ -204,3 +308,5 @@
   </div>
 </div>
 </div>
+
+

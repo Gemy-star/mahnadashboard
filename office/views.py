@@ -13,7 +13,6 @@ from django.views.generic.detail import DetailView
 from django.utils import timezone
 
 
-
 class AddDocumentAndClient(View):
     clientForm = forms.ClientForm()
     documentForm = forms.DocumentForm()
@@ -37,13 +36,18 @@ class AddDocumentAndClient(View):
             return redirect('home-page')
 
 
-class AddClient(CreateView):
-    model = models.Clients
-    form_class = forms.ClientForm
-    template_name = 'office/clients/addClient.html'
+def SetDocumentCompleted(request, pk):
+    document = models.Documents.objects.get(pk=pk)
+    document.completed = True
+    document.save()
+    return redirect('home-page')
 
-    def get_success_url(self):
-        return reverse('all-clients')
+
+def SetPreviewCompleted(request, pk):
+    preview = models.Preview.objects.get(pk=pk)
+    preview.completed = True
+    preview.save()
+    return redirect('home-page')
 
 
 class AllClients(View):
@@ -61,28 +65,10 @@ class UpdateClient(UpdateView):
         return reverse('all-clients')
 
 
-class AddDocument(CreateView):
-    model = models.Documents
-    form_class = forms.DocumentForm
-    template_name = 'office/documents/addDocument.html'
-
-    def get_success_url(self):
-        return reverse('home-page')
-
-
 class AllDocuments(View):
     def get(self, request):
         data = models.Documents.objects.all()
         return render(request, 'office/documents/allDocuments.html', context={"data": data})
-
-
-class UpdateDocument(UpdateView):
-    model = models.Documents
-    form_class = forms.DocumentForm
-    template_name = 'office/documents/updateDocument.html'
-
-    def get_success_url(self):
-        return reverse('all-documents')
 
 
 class AddPreview(View):
@@ -90,19 +76,20 @@ class AddPreview(View):
                                         form=forms.ImageForm, extra=3)
     postForm = forms.PreviewForm()
 
-    def get(self, request):
+    def get(self, request, pk):
         formset = self.ImageFormSet(queryset=models.LocationImages.objects.none())
         return render(request, 'office/previews/addpreview.html',
                       context={'postForm': self.postForm, 'formset': formset})
 
-    def post(self, request):
+    def post(self, request, pk):
         postForm = forms.PreviewForm(request.POST)
         formset = self.ImageFormSet(request.POST, request.FILES,
                                     queryset=models.LocationImages.objects.none())
         if postForm.is_valid() and formset.is_valid():
             post_form = postForm.save(commit=False)
+            document = models.Documents.objects.get(pk=pk)
+            post_form.document = document
             post_form.save()
-
             for form in formset.cleaned_data:
                 if form:
                     image = form['image']
@@ -129,4 +116,3 @@ class PreviewDetails(DetailView):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
-

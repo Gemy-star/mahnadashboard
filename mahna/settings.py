@@ -44,7 +44,11 @@ INSTALLED_APPS = [
     'xhtml2pdf',
     'qrcode',
     'image',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 IMAGE_CACHE_ROOT = os.path.join(BASE_DIR, 'static/images/qrcode')
 IMAGE_CACHE_URL = '/qrcode/'

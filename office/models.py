@@ -10,6 +10,9 @@ class Clients(models.Model):
     authorizations = models.TextField(null=True, blank=True)
     rights = models.TextField(null=True, blank=True)
     benfits = models.TextField(null=True, blank=True)
+    document_1 = models.FileField(upload_to='clients_documents/', null=True, blank=True)
+    document_2 = models.FileField(upload_to='clients_documents/', null=True, blank=True)
+    document_3 = models.FileField(upload_to='clients_documents/', null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
@@ -34,6 +37,7 @@ class Documents(models.Model):
         else:
             return (no * 1000) + 1
 
+    completed = models.BooleanField(null=True, default=False, blank=True)
     documentNumber = models.CharField(max_length=255, unique=True, default=DocumentNumber)
     ownerPlace = models.CharField(max_length=255, null=True, blank=True)
     ownerName = models.CharField(max_length=255, null=True, blank=True)
@@ -81,6 +85,7 @@ class Preview(models.Model):
     lat = models.FloatField(null=True, blank=True)
     lang = models.FloatField(null=True, blank=True)
     document = models.ForeignKey(Documents, on_delete=models.CASCADE)
+    completed = models.BooleanField(null=True, default=False, blank=True)
 
     def __str__(self):
         return self.document.client.name

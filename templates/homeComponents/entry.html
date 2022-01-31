@@ -1,5 +1,6 @@
-    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-        <a
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+       <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4 pt-2">
+            <a
           href="{% url 'all-clients' %}"
           style="cursor: pointer; text-decoration: none"
         >
@@ -22,22 +23,19 @@
                     </h4>
                   </div>
                 </div>
-              
+
               </div>
             </div>
           </div>
         </a>
-      </div>
+       </div>
 
-      <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-        <a
-          href="{% url 'add-doc_client' %}"
-          style="cursor: pointer; text-decoration: none"
-        >
+            <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4 pt-2">
+
           <div class="card">
             <div class="card-body p-3">
               <div class="row">
-                <div class="col-12">
+                <div class="col-8">
                   <div class="numbers">
                     <h4
                       class="
@@ -49,13 +47,64 @@
                         text-center
                       "
                     >
-                      مستند عقارى
+                      عدد الطلبات
                     </h4>
                   </div>
                 </div>
-              
+                  <div class="col-4">
+                      <p class="text-center text-bold text-black-50">{{ dcoument_all.count }}</p>
+                  </div>
               </div>
             </div>
           </div>
-        </a>
+       </div>
+
+       <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4 pt-3">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <h4
+                      class="
+                        text-sm
+                        blue-khieer
+                        mb-0
+                        text-capitalize
+                        font-weight-bold
+                        text-center
+                      "
+                    >
+                      الطلبات المرسلة
+                    </h4>
+                  </div>
+                </div>
+                <div class="col-4">
+                      <p class="text-center text-bold text-black-50">{{ documents_for_preview.count }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      </div>
+
+
+      <div class="col-xl-9 col-sm-6 mb-xl-0 mb-4">
+            <div class="card mb-4">
+            <div class="card-header pb-0">
+               <div class="row">
+                    <h6>الطلبات المدخلة</h6>
+               </div>
+                <div class="row pt-2 justify-content-between">
+                 <div class="col-lg-3 col-6">
+                      <a href="{% url 'add-doc_client' %}" class="btn btn-primary bg-maal text-white btn-rounded">مستند عقارى</a>
+                 </div>
+                </div>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                       {% include 'partials/tables/_entryTable.html' with data=documents %}
+
+            </div>
+        </div>
+
       </div>

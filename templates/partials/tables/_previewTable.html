@@ -1,0 +1,44 @@
+    <div class="table-responsive">
+
+                        <table class="table align-items-center table-bordered">
+                            <thead class="bg-maal" style="height: 2vh;">
+                                <tr>
+                                    <th class="text-xxs font-weight-bolder text-white">رقم الطلب </th>
+                                    <th class="text-xxs font-weight-bolder text-white">عمر العقار</th>
+                                    <th class="text-xxs text-white font-weight-bolder">الوصف  </th>
+                                                                       {%  if request.user.user_type == 6%}
+                                    <th class="text-secondary opacity-7 text-white"></th>
+                                        {% else %}
+                                                                           <th class="text-secondary opacity-7 text-white"></th>
+
+                                    {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {% for item in data %}
+                              <tr>
+                                        <td>
+                                                    <p class="mb-0 text-xxs txt-black">{{ item.document.documentNumber }}</p>
+
+                                        </td>
+ <td>
+                                                    <p class="mb-0 text-xxs txt-black">{{ item.locationAge }}</p>
+
+                                        </td>
+                                   <td>
+                                                    <p class="mb-0 text-xxs txt-black">{{ item.locationDescription|safe }}</p>
+
+                                        </td>
+
+                                   {%  if request.user.user_type == 6 %}
+                                   <td>
+                                            <a class="btn btn-sm btn-primary bg-maal text-white" href="{% url 'set_preview_completed' item.pk %}">إرسال</a>
+
+                                </td>
+                                 {% endif %}
+                                    </tr>
+                               {% endfor %}
+
+                            </tbody>
+                        </table>
+</div>
