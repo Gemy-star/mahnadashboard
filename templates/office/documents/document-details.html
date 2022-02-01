@@ -1,0 +1,218 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}لوحة التحكم {% endblock title %}
+{% block body %}
+<section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
+    <div class=" bg-kheer page-header align-items-start min-vh-90 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('../../../static/images/mahna.png')">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+     {% include 'partials/_menu.html' %}
+
+        <div class="row pt-3 justify-content-center">
+             <div class="col-10">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6 class="text-center"> بيانات مستند عقارى</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="row d-flex justify-content-center">
+                   <div class="table-responsive">
+                       <table class="table align-items-center table-borderless"e>
+                           <thead class="bg-maal">
+                         <tr>
+                             <th>
+             <p class="text-white text-center">  بيانات المستند العقارى</p>
+                             </th>
+                             <th>
+
+                             </th>
+                         </tr>
+                           </thead>
+                           <tbody>
+                           <tr>
+                               <td>
+                                   <h5 class="txt-black text-bold text-center">رقم الطلب</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.documentNumber }}</p>
+                               </td>
+                           </tr>
+                           <tr>
+                                    <td>
+                                   <h5 class="txt-black text-bold text-center">جهة صاحب الطلب</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.ownerPlace }}</p>
+                               </td>
+                           </tr>
+
+                               <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center"> إسم المالك</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.ownerName }}</p>
+                               </td>
+                           </tr>
+                             <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center"> هوية المالك</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.ownerNationalID }}</p>
+                               </td>
+                           </tr>
+                               <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center"> نوع العقار</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.get_realStateType_display }}</p>
+                               </td>
+                           </tr>
+                                 <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center">رقم الصك</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.paperNumber }}</p>
+                               </td>
+                           </tr>
+                               <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center"> تاريخ الصك</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.paperDate }}</p>
+                               </td>
+
+                           </tr>
+                               <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center">مساحة الأرض</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.area }}</p>
+                               </td>
+
+                           </tr>
+                               <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center">مسطحات البناء</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.buildingArea }}</p>
+                               </td>
+
+                           </tr>
+                                <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center">الغرض من التقييم</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.ratingPurpose }}</p>
+                               </td>
+
+                           </tr>
+                           <tr>
+                           <thead class="bg-maal">
+                         <tr>
+                             <th>
+                                 <p class="text-center text-white">  بيانات العميل</p>
+                             </th>
+                             <th>
+
+                             </th>
+                         </tr>
+                           </thead>
+                           </tr>
+                           <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center">اسم العميل</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.client.name }}</p>
+                               </td>
+                           </tr>
+                            <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center">هاتف العميل</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.client.phone }}</p>
+                               </td>
+                           </tr>
+                            <tr>
+                                      <td>
+                                   <h5 class="txt-black text-bold text-center">المستفيدين من الأستخدام</h5>
+                               </td>
+                               <td>
+                                   <p class="text-secondary  text-center">{{ object.client.benfits }}</p>
+                               </td>
+                           </tr>
+                                    <thead class="bg-maal">
+                         <tr>
+                             <th>
+             <p class="text-white text-center">  بيانات المعاينات للطلب</p>
+                             </th>
+                             <th>
+
+                             </th>
+                         </tr>
+                           </thead>
+          {% for perv in object.previews.all %}
+                           <tr>
+                           <td>
+                               <h5 class="txt-black text-bold text-center">حالة المبنى </h5>
+                           </td>
+                           <td>
+                               <p class="text-secondary  text-center">{{ prev.get_locationState_display }}</p>
+                           </td>
+</tr>
+                                         <tr>
+                           <td>
+                               <h5 class="txt-black text-bold text-center">وصف العقار </h5>
+                           </td>
+                           <td>
+                               <p class="text-secondary text-center">{{ prev.locationDescription }}</p>
+                           </td>
+</tr>
+
+                                        <tr>
+                           <td>
+                               <h5 class="txt-black text-bold text-center">نوع التشطيب </h5>
+                           </td>
+                           <td>
+                               <p class="text-secondary text-center">{{ prev.get_FinishType_display }}</p>
+                           </td>
+</tr>
+                           {% endfor %}
+                           </tbody>
+                       </table>
+                   </div>
+                </div>
+            </div>
+        {% if request.user.user_type == 1 or request.user.user_type == 2 or  request.user.user_type == 4  %}
+        <div class="card-footer">
+            <div class="row justify-content-center">
+                <div class="col-3">
+                    <a class="btn btn-sm btn-rounded text-white text-white bg-maal" href="{% url 'document-update' object.pk %}">تعديل</a>
+                </div>
+                <div class="col-3">
+                    <a class="btn btn-danger btn-sm btn-rounded text-white text-white" href="{% url 'document-delete' object.pk %}">حذف</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        </div>
+        </div>
+   </div>
+    </div>
+  </section>
+{% endblock body %}

@@ -18,7 +18,10 @@
                              {% for item in data %}
                               <tr>
                                         <td>
+                                               <a href="{% url 'document-details' item.document.pk %}" style="text-decoration: none; cursor: pointer">
                                                     <p class="mb-0 text-xxs txt-black">{{ item.document.documentNumber }}</p>
+
+               </a>
 
                                         </td>
  <td>

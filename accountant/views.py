@@ -2,8 +2,8 @@ import os
 from pathlib import Path
 
 import PIL
-from django.views.generic.edit import CreateView, UpdateView
-from django.urls import reverse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
 from . import models
 from . import forms
 from django.http import HttpResponse
@@ -37,6 +37,12 @@ class UpdateVoucher(UpdateView):
 
     def get_success_url(self):
         return reverse('home-page')
+
+
+class DeleteVoucher(DeleteView):
+    model = models.Voucher
+    template_name = 'partials/_deleteEntry.html'
+    success_url = reverse_lazy('home-page')
 
 
 class VoucherReport(View):

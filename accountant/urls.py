@@ -8,5 +8,7 @@ urlpatterns = [
          views.AddVoucher.as_view(), name='add-voucher'),
     path('voucher/report/<int:pk>',
          views.VoucherReport.as_view(), name='voucher-report'),
-    path('voucher/<int:pk>', views.VoucherDetail.as_view(), name='voucher-detail')
+    path('voucher/<int:pk>', views.VoucherDetail.as_view(), name='voucher-detail'),
+    path('voucher/delete/<int:pk>', views.DeleteVoucher.as_view(), name='voucher-delete')
+
 ]

@@ -1,9 +1,11 @@
 from django.db import models
 from office.models import Preview
+from django_extensions.db.fields import AutoSlugField
 
 
 # Create your models here.
 class ResidentDocument(models.Model):
+    slug = AutoSlugField(populate_from="residentRate")
     residentRate = models.CharField(max_length=255, null=True, blank=True)
     VALUE_BASE = (
         (1, 'عادله'),
@@ -21,6 +23,7 @@ class ResidentDocument(models.Model):
 
 
 class ResidentBuilding(models.Model):
+    slug = AutoSlugField(populate_from="address")
     residentDate = models.DateField(null=True, blank=True)
     areaNumber = models.IntegerField(null=True, blank=True)
     streetCount = models.IntegerField(null=True, blank=True, default=0)
@@ -38,6 +41,7 @@ class ResidentBuilding(models.Model):
 
 
 class CompareBuilding(models.Model):
+    slug = AutoSlugField(populate_from="Compareaddress")
     compareDate = models.DateField(null=True, blank=True)
     CompareareaNumber = models.IntegerField(null=True, blank=True)
     Comparearea = models.IntegerField(null=True, blank=True)
@@ -78,6 +82,7 @@ class CompareBuilding(models.Model):
 
 
 class DirectBuildingCost(models.Model):
+    slug = AutoSlugField(populate_from="areaBuildCost")
     document = models.ForeignKey(ResidentDocument, on_delete=models.CASCADE, unique=True)
     areaBuildCost = models.IntegerField(null=True, blank=True)
     priceMeterCost = models.IntegerField(null=True, blank=True)
@@ -91,6 +96,7 @@ class DirectBuildingCost(models.Model):
 
 
 class UndirectBuildingCost(models.Model):
+    slug = AutoSlugField(populate_from="technicalFees")
     document = models.ForeignKey(ResidentDocument, on_delete=models.CASCADE, unique=True)
     technicalFees = models.IntegerField(null=True, blank=True)
     developerFees = models.IntegerField(null=True, blank=True)
@@ -108,6 +114,7 @@ class DamagedBuildingRate(models.Model):
     document = models.ForeignKey(ResidentDocument, on_delete=models.CASCADE, unique=True)
     buildingAge = models.IntegerField(null=True, blank=True)
     normalAge = models.IntegerField(null=True, blank=True)
+    slug = AutoSlugField(populate_from="normalAge")
 
     def __str__(self) -> str:
         return str(self.pk)

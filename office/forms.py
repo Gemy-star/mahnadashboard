@@ -24,7 +24,7 @@ class DocumentForm(forms.ModelForm):
     class Meta:
         model = models.Documents
         fields = '__all__'
-        exclude = ('client', 'enteredBy','is_completed')
+        exclude = ('client', 'enteredBy','completed')
         widgets = {
             'paperDate': forms.DateInput(
                 format=('%Y-%m-%d'),
@@ -50,7 +50,7 @@ class PreviewForm(forms.ModelForm):
         fields = ['locationUrl', 'locationDescription', 'locationState', 'locationLevel', 'FinishType',
                   'structureType', 'locationAge', 'document', 'lat', 'lang'
                   ]
-        exclude = ('document',)
+        exclude = ('document','completed')
         widgets = {
             'locationUrl': forms.URLInput(
                 attrs={'id': 'LocationUrlfield', 'class': 'form-control', 'placeholder': 'رابط الموقع'}),

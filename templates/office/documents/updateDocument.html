@@ -1,6 +1,7 @@
 {% extends 'masterpage.html' %}
 {% load static %}
 {% block title %}لوحة التحكم {% endblock title %}
+{% load crispy_forms_tags %}
 
 {% block body %}
 <section class="min-vh-85 mb-8" style="background-color: #f4f4f4">
@@ -27,12 +28,7 @@
                         <form  method="post">
                         {% include 'partials/_messages.html' %}
     {% csrf_token %}
-                             {% for filed in form %}
-                                            <div class="form-group">
-
-                                                {{ filed }}
-                                            </div>
-                                        {% endfor %}
+                                                                             {{ form|crispy }}
                         <div class="text-center">
           <button type="submit" class="btn btn-sm text-white bg-mahna">
                            تعديل

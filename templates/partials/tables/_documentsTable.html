@@ -1,0 +1,78 @@
+            <div class="table-responsive">
+              <table class="table align-items-center table-bordered">
+                <thead class="bg-mahna" style="height: 2vh">
+                  <tr>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      جهة صاحب الطلب
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      اسم المالك
+                    </th>
+                    <th class="text-xxs text-white font-weight-bolder">
+                      هوية المالك
+                    </th>
+                     <th class="text-xxs text-white font-weight-bolder">
+                      نوع العقار
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      رقم الصك
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      تاريخ الصك
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      مساحة الأرض
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      مسطحات البناء
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      العميل
+                    </th>
+                    <th class="text-xxs font-weight-bolder text-white">
+                      الغرض من التقييم
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in data %}
+                  <tr>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">
+                        {{ item.ownerPlace }}
+                      </p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.ownerName }}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">
+                        {{ item.ownerNationalID }}
+                      </p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.get_realStateType_display }}</p>
+                    </td>
+                     <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.paperNumber }}</p>
+                    </td>
+                      <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.paperDate }}</p>
+                    </td>
+                     <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.area }}</p>
+                    </td>
+                     <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.buildingArea }}</p>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.client.name }}</p>
+                    </td>
+                      <td>
+                      <p class="mb-0 text-xxs txt-black text-align-center">{{ item.ratingPurpose }}</p>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>

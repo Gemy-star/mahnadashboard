@@ -4,8 +4,8 @@ from django.urls import reverse
 from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
-
-
+from mahna.settings import DEPLOY_URL
+from django_extensions.db.fields import AutoSlugField
 class Voucher(models.Model):
     def VoucherNumber():
         no = Voucher.objects.count()
@@ -14,6 +14,7 @@ class Voucher(models.Model):
         else:
             return (no * 10000) + 1
 
+    slug = AutoSlugField(populate_from="clientName")
     voucherId = models.CharField(max_length=255, unique=True, default=VoucherNumber)
     voucherDate = models.DateTimeField(auto_now_add=True)
     taxCompanyNumber = models.IntegerField(null=True, blank=True)
@@ -38,10 +39,13 @@ class Voucher(models.Model):
     def Totalpay(self):
         return self.totalBeforeTax + self.TotaltaxCost
 
+    def get_full_path(self):
+        return f"{DEPLOY_URL}{self.get_absolute_url()}"
     def get_absolute_url(self):
         return reverse("voucher-detail", kwargs={'pk': self.id})
 
     def CreateQrCode(self, *args, **kwargs):
+
         qr_image = qrcode.make(self.get_absolute_url())
         qr_offset = Image.new('RGB', (310, 310), 'white')
         qr_offset.paste(qr_image)

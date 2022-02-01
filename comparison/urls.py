@@ -34,5 +34,6 @@ urlpatterns = [
          views.UpdateResidentBuilding.as_view(), name='update-residentBuilding'),
     path('complete/resident/<int:pk>',
          views.SetResidentCompleted, name='set_resident_complete'),
-
+    path('delete/resident/<int:pk>',
+         views.DeleteResidentDocument, name='delete-resident'),
 ]

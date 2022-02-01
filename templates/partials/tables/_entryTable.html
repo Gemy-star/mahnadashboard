@@ -22,7 +22,10 @@
                              {% for item in data %}
                               <tr>
                                         <td>
-                                                    <p class="mb-0 text-xxs text-center txt-black">{{ item.documentNumber }}</p>
+                                               <a href="{% url 'document-details' item.pk %}" style="text-decoration: none; cursor: pointer">
+                                                                    <p class="mb-0 text-xxs text-center txt-black">{{ item.documentNumber }}</p>
+
+               </a>
 
                                         </td>
  <td>

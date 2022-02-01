@@ -45,11 +45,13 @@ INSTALLED_APPS = [
     'qrcode',
     'image',
     'crispy_forms',
+    'django_extensions',
+    'django_filters',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
+DEPLOY_URL = 'https://mahna.pythonanywhere.com'
 IMAGE_CACHE_ROOT = os.path.join(BASE_DIR, 'static/images/qrcode')
 IMAGE_CACHE_URL = '/qrcode/'
 MIDDLEWARE = [

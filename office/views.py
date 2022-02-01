@@ -1,13 +1,10 @@
 from django.contrib import messages
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from office import models
 from office import forms
-from mahna.views import EmailThread
 from django.forms import modelformset_factory
 from django.views.generic.detail import DetailView
 from django.utils import timezone
@@ -62,7 +59,34 @@ class UpdateClient(UpdateView):
     template_name = 'office/clients/editClient.html'
 
     def get_success_url(self):
-        return reverse('all-clients')
+        return reverse_lazy('all-clients')
+
+
+class DeleteDocument(DeleteView):
+    model = models.Documents
+    template_name = 'partials/_deleteEntry.html'
+    success_url = reverse_lazy('home-page')
+
+
+class DeleteClient(DeleteView):
+    model = models.Clients
+    template_name = 'partials/_deleteEntry.html'
+    success_url = reverse_lazy('home-page')
+
+
+class DeletePreview(DeleteView):
+    model = models.Preview
+    template_name = 'partials/_deleteEntry.html'
+    success_url = reverse_lazy('home-page')
+
+
+class UpdateDocument(UpdateView):
+    model = models.Documents
+    form_class = forms.DocumentForm
+    template_name = 'office/documents/updateDocument.html'
+
+    def get_success_url(self):
+        return reverse_lazy('home-page')
 
 
 class AllDocuments(View):
@@ -116,3 +140,8 @@ class PreviewDetails(DetailView):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+
+
+class DocumentDetails(DetailView):
+    model = models.Documents
+    template_name = 'office/documents/document-details.html'

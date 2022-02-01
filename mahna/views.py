@@ -5,6 +5,8 @@ from django.contrib.auth.models import Group
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
+
+from office.filters import DocumentFilter
 from office.models import Documents, Preview
 from accounts.models import User
 from comparison.models import ResidentDocument
@@ -31,6 +33,7 @@ class HomePage(View):
         all_prieviews = Preview.objects.all()
         residentDocument_not = ResidentDocument.objects.filter(completed=False)
         resident_ready = ResidentDocument.objects.filter(completed=True)
+        f = DocumentFilter(request.GET, queryset=Documents.objects.all())
 
         context = {
             "documents": documents,
@@ -42,7 +45,8 @@ class HomePage(View):
             "documents_for_preview": documents_for_preview,
             "dcoument_all": Documents.objects.all(),
             "residentDocument_not": residentDocument_not,
-            "resident_ready": resident_ready
+            "resident_ready": resident_ready,
+            'filter': f,
 
         }
         return render(request, 'home-page.html', context=context)

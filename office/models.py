@@ -1,11 +1,13 @@
 from django.db import models
 from accounts.models import User
 from django.template.defaultfilters import slugify
+from django_extensions.db.fields import AutoSlugField
 
 
 # Create your models here.
 class Clients(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
+    slug = AutoSlugField(populate_from="name")
     phone = models.CharField(max_length=255, null=True, blank=True)
     authorizations = models.TextField(null=True, blank=True)
     rights = models.TextField(null=True, blank=True)
@@ -41,6 +43,7 @@ class Documents(models.Model):
     documentNumber = models.CharField(max_length=255, unique=True, default=DocumentNumber)
     ownerPlace = models.CharField(max_length=255, null=True, blank=True)
     ownerName = models.CharField(max_length=255, null=True, blank=True)
+    slug = AutoSlugField(populate_from="ownerName")
     ownerNationalID = models.CharField(max_length=255, null=True, unique=True)
     realStateType = models.SmallIntegerField(choices=REALSTATE_CHOICES, null=True)
     paperNumber = models.IntegerField(null=True, blank=True)
@@ -84,8 +87,9 @@ class Preview(models.Model):
     locationAge = models.SmallIntegerField(null=True, blank=True)
     lat = models.FloatField(null=True, blank=True)
     lang = models.FloatField(null=True, blank=True)
-    document = models.ForeignKey(Documents, on_delete=models.CASCADE)
+    document = models.ForeignKey(Documents, on_delete=models.CASCADE,related_name='previews')
     completed = models.BooleanField(null=True, default=False, blank=True)
+    slug = AutoSlugField(populate_from="locationDescription")
 
     def __str__(self):
         return self.document.client.name
