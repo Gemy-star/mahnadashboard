@@ -63,6 +63,9 @@
                    <th class="text-xxs font-weight-bolder text-white">
 
                 </th>
+                   <th class="text-xxs font-weight-bolder text-white">
+
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -96,6 +99,11 @@
                 <td>
                     <a href="{% url 'update-voucher' item.pk %}"  class="mb-0 text-xxs txt-black text-align-center">
                         <i class="fas fa-pen text-lg text-success"></i>                  
+                      </a>
+                  </td>
+                <td>
+                    <a href="{% url 'voucher-delete' item.pk %}"  class="mb-0 text-xxs txt-black text-align-center">
+                        <i class="fas fa-pen text-lg text-success"></i>
                       </a>
                   </td>
               </tr>

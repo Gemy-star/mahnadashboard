@@ -208,7 +208,7 @@
                 </p>
               </td>
             <td>
-               <a href="{% url 'add-residentDocument' item.slug %}" class="btn btn-rounded btn-primary text-white bg-maal">تقييم</a>
+               <a href="{% url 'add-residentDocument' item.pk %}" class="btn btn-rounded btn-primary text-white bg-maal">تقييم</a>
             </td>
             </tr>
             {% endfor %}
@@ -249,7 +249,7 @@
             {% for item in residentDocument_not %}
             <tr>
               <td>
-                 <a href="{% url 'document-details' item.document.slug %}" style="text-decoration: none; cursor: pointer">
+                 <a href="{% url 'document-details' item.previews.document.pk %}" style="text-decoration: none; cursor: pointer">
                     <p class="mb-0 text-xxs txt-black text-align-center">
                   {{ item.document.documentNumber }}
                 </p>

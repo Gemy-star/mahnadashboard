@@ -35,8 +35,6 @@ class DeleteResidentDocument(DeleteView):
     success_url = reverse_lazy('home-page')
 
 
-
-
 def SetResidentCompleted(request, pk):
     resident = models.ResidentDocument.objects.get(pk=pk)
     resident.completed = True
@@ -92,35 +90,35 @@ class UpdateCompareBuilding(UpdateView):
 class SouqComparePage(View):
     def get(self, request, pk):
         request.session['pk_buildDoc'] = pk
-        document = models.ResidentDocument.objects.get(pk=pk)
-        building = models.ResidentBuilding.objects.get(residentDocument=document)
-        compareBuilding = models.CompareBuilding.objects.filter(residentBuilding=building)
-        data = {
-            "building": building,
-            "compareBuilding": compareBuilding
-        }
-        return render(request, 'comparison/souqComparison.html', context=data)
+        if models.ResidentBuilding.objects.filter(residentDocument_id=pk).count() > 0:
+            building = models.ResidentBuilding.objects.get(residentDocument_id=pk)
+            compareBuilding = models.CompareBuilding.objects.filter(residentBuilding=building)
+            data = {
+                "building": building,
+                "compareBuilding": compareBuilding
+            }
+            return render(request, 'comparison/souqComparison.html', context=data)
+        else:
+            return redirect('add-residentBuilding')
 
 
 class DirectAndUnDirectPage(View):
     def get(self, request, pk):
-        request.session['pk_buildDoc'] = pk
         document = models.ResidentDocument.objects.get(pk=pk)
         if models.DirectBuildingCost.objects.filter(document=document).count() > 0:
-            directCost = models.DirectBuildingCost.objects.get(document=document)
-            unDirectCost = models.UndirectBuildingCost.objects.get(document=document)
-            data = {
-                "directCost": directCost,
-                "unDirectCost": unDirectCost,
-                "totalCost": directCost.TotalDirectCost + unDirectCost.TotalUnDirectCost,
-            }
+            if models.UndirectBuildingCost.objects.filter(document=document).count() > 0:
+                directCost = models.DirectBuildingCost.objects.get(document=document)
+                unDirectCost = models.UndirectBuildingCost.objects.get(document=document)
+                data = {
+                    "directCost": directCost,
+                    "unDirectCost": unDirectCost,
+                    "totalCost": directCost.TotalDirectCost + unDirectCost.TotalUnDirectCost,
+                }
+                return render(request, 'comparison/directAndUndirect.html', context=data)
+            else:
+                return redirect('add-undirect')
         else:
-            data = {
-                "directCost": 0,
-                "unDirectCost": 0,
-                "totalCost": 0,
-            }
-        return render(request, 'comparison/directAndUndirect.html', context=data)
+            return redirect('add-direct')
 
 
 class AddDirectCost(CreateView):
